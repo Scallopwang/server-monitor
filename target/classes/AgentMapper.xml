@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guotai.servermonitorspringboot.dao.AgentDao">
+    <select id="getAgentIPList" resultType="com.guotai.servermonitorspringboot.entity.Agent">
+    select * from monitor.agent;
+    </select>
+
+    <select id="getAgentByIP" resultType="com.guotai.servermonitorspringboot.entity.Agent" parameterType="java.lang.String">
+    select * from monitor.agent where ip = #{ip};
+    </select>
+
+    <insert id="insertAgent" parameterType="com.guotai.servermonitorspringboot.entity.Agent">
+    insert into monitor.agent(ip,cpu_free,memory_free,time_stamp) values (#{ip},#{cpu_free},#{memory_free},#{time_stamp});
+    </insert>
+</mapper>
