@@ -105,6 +105,7 @@
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
                     <include>**/*.ico</include>
+
                 </includes>
             </resource>
             <resource>
@@ -113,6 +114,9 @@
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
                     <include>**/*.ico</include>
+                    <include>**/*.html</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
                 </includes>
             </resource>
         </resources>
