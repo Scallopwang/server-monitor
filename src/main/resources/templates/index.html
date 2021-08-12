@@ -125,7 +125,7 @@
 
                             <div class="card-block p-b-0 bg-blue bg-inverse">
                                 <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                <div id="container" style="height: 200px;"></div>
+                                <div id="container" style="height: 400px;"></div>
                                 <script type="text/javascript">
                                     var chartDom = document.getElementById('container');
                                     var myChart = echarts.init(chartDom);
@@ -167,6 +167,12 @@
                                         yAxis: {
                                             type: 'value',
                                             boundaryGap: [0, '100%']
+                                        },
+                                        grid: {
+                                            left: '5%',
+                                            right: '5%',
+                                            bottom: '20%',
+                                            top: '10%'
                                         },
                                         dataZoom: [{
                                             type: 'inside',
@@ -263,49 +269,6 @@
                     <!-- .col-lg-8 -->
                     <!-- End Company overview Chart -->
 
-                    <!-- Weekly transactions Widget -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Weekly transactions</h4>
-                                <ul class="card-actions">
-                                    <li class="dropdown">
-                                        <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li class="dropdown-header">Profile</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">3</span> News</a>
-                                            </li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">1</span> Messages</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-header">More</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <!-- .card-actions -->
-                            </div>
-                            <!-- .card-header -->
-                            <div class="card-block p-b-0">
-                                <div style="height: 268px;">
-                                    <canvas class="js-chartjs-lines2"></canvas>
-                                </div>
-                            </div>
-                            <div class="card-block text-center">
-                                <span class="label bg-green m-r-xs">Statistics <i
-                                        class="ion-connection-bars"></i></span> <small>for the <a
-                                    href="javascript:void(0)">last year</a></small>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-lg-4 -->
-                    <!-- End Weekly transactions Widget -->
                 </div>
                 <!-- .row -->
 
@@ -376,139 +339,9 @@
                     <!-- .col-lg-8 -->
                     <!-- End Company overview Chart -->
 
-                    <!-- Weekly transactions Widget -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Weekly transactions</h4>
-                                <ul class="card-actions">
-                                    <li class="dropdown">
-                                        <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li class="dropdown-header">Profile</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">3</span> News</a>
-                                            </li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">1</span> Messages</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-header">More</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <!-- .card-actions -->
-                            </div>
-                            <!-- .card-header -->
-                            <div class="card-block p-b-0">
-                                <div style="height: 268px;">
-                                    <canvas class="js-chartjs-lines2"></canvas>
-                                </div>
-                            </div>
-                            <div class="card-block text-center">
-                                <span class="label bg-green m-r-xs">Statistics <i
-                                        class="ion-connection-bars"></i></span> <small>for the <a
-                                    href="javascript:void(0)">last year</a></small>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- .col-lg-4 -->
-                    <!-- End Weekly transactions Widget -->
                 </div>
                 <!-- .row -->
 
-
-                <div class="row">
-                    <div class="col-lg-8">
-                        <!-- Yearly summary widget -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Yearly summary</h4>
-                                <ul class="card-actions">
-                                    <li class="dropdown">
-                                        <button type="button" data-toggle="dropdown"><i class="ion-more"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li class="dropdown-header">Profile</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">3</span> News</a>
-                                            </li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)"><span
-                                                        class="badge pull-right">1</span> Messages</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-header">More</li>
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0)">Edit Profile..</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <!-- .card-actions -->
-                            </div>
-                            <!-- .card-header -->
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <p class="h6 small text-muted">Yearly change</p>
-                                        <p class="h3 m-t-0">+214.22</p>
-                                        <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                        <div style="height: 120px;">
-                                            <canvas class="js-chartjs-lines4"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <p class="h6 small text-muted">Shares trade</p>
-                                        <p class="h3 m-t-0">$28.74M</p>
-                                        <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                        <div style="height: 120px;">
-                                            <canvas class="js-chartjs-lines5"></canvas>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <p class="h6 small text-muted">Yearly change</p>
-                                        <p class="h3 m-t-0">+74%</p>
-                                        <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                        <div style="height: 120px;">
-                                            <canvas class="js-chartjs-lines6"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .card-block -->
-                        </div>
-                        <!-- .card -->
-                        <!-- End Yearly summary widget -->
-                    </div>
-                    <!-- .col-lg-8 -->
-
-                    <!-- Server load Widget -->
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header bg-purple bg-inverse">
-                                <h4>Server load</h4>
-                                <ul class="card-actions">
-                                    <li>
-                                        <span class="js-flot-live-info"></span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-block bg-purple p-x-0 p-b-0">
-                                <!-- Live Chart Container -->
-                                <div class="js-flot-live" style="height: 207px;"></div>
-                            </div>
-                        </div>
-                        <!-- .card -->
-                    </div>
-                    <!-- End Server load Widget // .col-lg-4 -->
-                </div>
-                <!-- .row -->
             </div>
             <!-- .container-fluid -->
             <!-- End Page Content -->
