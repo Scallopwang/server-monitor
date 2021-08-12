@@ -25,24 +25,6 @@ public class ThriftServer implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     private ThriftAgentService thriftAgentService;
 
-//    public static void main(String[] args) {
-//        System.out.println("server starting...");
-//        TNonblockingServerSocket tNonblockingServerSocket = null;
-//        try {
-//            tNonblockingServerSocket = new TNonblockingServerSocket(8888);
-//        } catch (TTransportException e) {
-//            e.printStackTrace();
-//        }
-//        THsHaServer.Args args1 = new THsHaServer.Args(tNonblockingServerSocket).minWorkerThreads(2).maxWorkerThreads(4);
-//        AgentService.Processor<ThriftAgentService> AgentServiceProcessor = new AgentService.Processor<>(new ThriftAgentService());
-//
-//        args1.protocolFactory(new TCompactProtocol.Factory());
-//        args1.transportFactory(new TFramedTransport.Factory());
-//        args1.processorFactory(new TProcessorFactory(AgentServiceProcessor));
-//        THsHaServer tHsHaServer = new THsHaServer(args1);
-//        System.out.println("server started");
-//        tHsHaServer.serve();
-//    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {

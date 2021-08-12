@@ -45,6 +45,48 @@
         <main class="app-layout-content">
             <!-- Page Content -->
             <div class="container-fluid p-y-md">
+
+                <div th:id="header-main" style="overflow: hidden">
+                    <form th:action="index" th:method="post">
+                        <div th:id="left" style="float: left;padding-left: 10%">
+                            <label th:for="commandinput">检索命令</label>
+                            <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
+                                   th:size="8">
+                        </div>
+                        <div style="float: left;padding-left: 5%">
+                            <button th:onclick="commandRes()" >查看指令结果</button>
+                        </div>
+                        <script th:inline="javascript">
+                            function commandRes() //声明标识符
+                            {
+                                var inputStr = [[${commandRes}]];
+                                alert(inputStr)
+                            }
+                        </script>
+
+                        <div th:id="right" style="float: left;padding-left: 10%">
+                            <label th:for="searchinput">搜索设备</label>
+                            <input th:id="searchinput" th:type="text" th:name="searchStr" th:placeholder="搜索内容"
+                                   th:size="8">
+                        </div>
+                        <div style="float: left;padding-left: 5%">
+                            <button th:onclick="searchRes()" >查看搜索结果</button>
+                        </div>
+                        <script th:inline="javascript">
+                            function searchRes() //声明标识符
+                            {
+                                alert("搜索结果为：")
+                            }
+                        </script>
+
+                        <div style="float: left;padding-left: 10%">
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+
+
                 <div class="row">
                     <div class="row-fluid">
                         <div class="span12">
@@ -74,10 +116,10 @@
                                     </script>
                                     <td>
                                         <form th:action="index" th:method="post">
-                                                <input th:id="inputname" th:type="text" th:name="machineName" th:placeholder="请输入备注" th:size="8">
-                                                <button type="submit" class="btn btn-default">提交</button>
+                                            <input th:id="inputname" th:type="text" th:name="machineName"
+                                                   th:placeholder="请输入备注" th:size="8">
+                                            <button type="submit" class="btn btn-default">提交</button>
                                         </form>
-
                                     </td>
 
                                 </tr>
@@ -96,7 +138,8 @@
                                     </script>
                                     <td>
                                         <form th:action="index" th:method="post">
-                                            <input th:id="inputname" th:type="text" th:name="machineName" th:placeholder="请输入备注" th:size="8">
+                                            <input th:id="inputname" th:type="text" th:name="machineName"
+                                                   th:placeholder="请输入备注" th:size="8">
                                             <button type="submit" class="btn btn-default">提交</button>
                                         </form>
 
@@ -137,11 +180,11 @@
                                     var date = [];
                                     var data = [Math.random() * 300];
 
-                                    for (var i = 1; i < 20000; i++) {
-                                        var now = new Date(base += oneDay);
-                                        date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-                                        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-                                    }
+                                    // for (var i = 1; i < 20000; i++) {
+                                    //     var now = new Date(base += oneDay);
+                                    //     date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+                                    //     data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+                                    // }
 
                                     option = {
                                         tooltip: {

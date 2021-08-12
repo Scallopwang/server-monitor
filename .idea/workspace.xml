@@ -20,14 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8c69c54-e1f0-4fa1-8336-3302f0c0fc93" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/guotai/servermonitorspringboot/utils/ExecuteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servermonitor-springboot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/servermonitor-springboot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guotai/servermonitorspringboot/controller/RealTimeDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/guotai/servermonitorspringboot/controller/RealTimeDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/guotai/servermonitorspringboot/utils/ThriftServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/guotai/servermonitorspringboot/utils/ThriftServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/guotai/servermonitorspringboot/ServerMonitorApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/guotai/servermonitorspringboot/ServerMonitorApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/guotai/servermonitorspringboot/controller/RealTimeDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/guotai/servermonitorspringboot/controller/RealTimeDataController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/guotai/servermonitorspringboot/utils/ThriftServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/guotai/servermonitorspringboot/utils/ThriftServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/guotai/servermonitorspringboot/ServerMonitorApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/guotai/servermonitorspringboot/ServerMonitorApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +78,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -90,32 +106,55 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerMonitorApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="servermonitor-springboot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.guotai.servermonitorspringboot.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.guotai.servermonitorspringboot" />
-      <option name="MAIN_CLASS_NAME" value="com.guotai.servermonitorspringboot.ServerMonitorApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ServerMonitorApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="servermonitor-springboot" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.guotai.servermonitorspringboot.utils.*" />
+          <option name="PATTERN" value="com.guotai.servermonitorspringboot.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.guotai.servermonitorspringboot" />
       <option name="MAIN_CLASS_NAME" value="com.guotai.servermonitorspringboot.ServerMonitorApplicationTests" />
       <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerMonitorApplicationTests.myTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="servermonitor-springboot" />
+      <useClassPathOnly />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.guotai.servermonitorspringboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.guotai.servermonitorspringboot" />
+      <option name="MAIN_CLASS_NAME" value="com.guotai.servermonitorspringboot.ServerMonitorApplicationTests" />
+      <option name="METHOD_NAME" value="myTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" value="" />
+      <envs>
+        <env name="-Dfile.encoding" value="utf-8" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerMonitorApplicationTests.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="servermonitor-springboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.guotai.servermonitorspringboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.guotai.servermonitorspringboot" />
+      <option name="MAIN_CLASS_NAME" value="com.guotai.servermonitorspringboot.ServerMonitorApplicationTests" />
+      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -130,15 +169,17 @@
     </configuration>
     <list>
       <item itemvalue="Application.ThriftServer" />
-      <item itemvalue="JUnit.ServerMonitorApplicationTests" />
+      <item itemvalue="JUnit.ServerMonitorApplicationTests.myTest" />
+      <item itemvalue="JUnit.ServerMonitorApplicationTests.test" />
       <item itemvalue="JUnit.ServerMonitorApplicationTests.contextLoads" />
       <item itemvalue="Spring Boot.ServerMonitorApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ThriftServer" />
+        <item itemvalue="JUnit.ServerMonitorApplicationTests.myTest" />
         <item itemvalue="JUnit.ServerMonitorApplicationTests.contextLoads" />
-        <item itemvalue="JUnit.ServerMonitorApplicationTests" />
+        <item itemvalue="JUnit.ServerMonitorApplicationTests.test" />
+        <item itemvalue="Application.ThriftServer" />
       </list>
     </recent_temporary>
   </component>
@@ -158,7 +199,8 @@
       <workItem from="1628735048652" duration="2558000" />
       <workItem from="1628737642583" duration="88000" />
       <workItem from="1628737751393" duration="634000" />
-      <workItem from="1628738407832" duration="379000" />
+      <workItem from="1628738407832" duration="3211000" />
+      <workItem from="1628748046134" duration="10177000" />
     </task>
     <servers />
   </component>
@@ -178,10 +220,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1628646597142">
+    <state x="-7" y="46" width="1138" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1628748402375">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="63" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1628646597142" />
+    <state x="-7" y="46" width="1138" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1628748402375" />
     <state x="527" y="52" key="#com.intellij.ide.util.MemberChooser" timestamp="1628644466006">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -190,38 +232,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="522" height="546" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1628645795694" />
-    <state width="1483" height="398" key="GridCell.Tab.0.bottom" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.0.bottom" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.0.center" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
+    <state width="1483" height="111" key="GridCell.Tab.0.center" timestamp="1628758304668">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.0.left" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1628758304668" />
+    <state width="1483" height="111" key="GridCell.Tab.0.left" timestamp="1628758304666">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.0.right" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1628758304666" />
+    <state width="1483" height="111" key="GridCell.Tab.0.right" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.1.bottom" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
+    <state width="1483" height="111" key="GridCell.Tab.1.bottom" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.1.center" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
+    <state width="1483" height="111" key="GridCell.Tab.1.center" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.1.left" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
+    <state width="1483" height="111" key="GridCell.Tab.1.left" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
-    <state width="1483" height="398" key="GridCell.Tab.1.right" timestamp="1628738390721">
+    <state width="1483" height="111" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
+    <state width="1483" height="111" key="GridCell.Tab.1.right" timestamp="1628758304669">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="398" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1628738390721" />
+    <state width="1483" height="111" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1628758304669" />
     <state width="1483" height="264" key="GridCell.Tab.2.bottom" timestamp="1628652179348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -238,10 +280,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1483" height="264" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1628652179348" />
-    <state x="153" y="0" key="SettingsEditor" timestamp="1628652484792">
+    <state x="153" y="0" key="SettingsEditor" timestamp="1628747579286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="153" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1628652484792" />
+    <state x="153" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1628747579286" />
     <state x="398" y="87" width="947" height="650" key="find.popup" timestamp="1628738142673">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

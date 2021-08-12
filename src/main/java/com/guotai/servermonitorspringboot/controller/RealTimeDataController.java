@@ -6,6 +6,7 @@
 package com.guotai.servermonitorspringboot.controller;
 
 import com.guotai.servermonitorspringboot.service.LocalAgentService;
+import com.guotai.servermonitorspringboot.utils.ExecuteCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +21,17 @@ public class RealTimeDataController {
     @Autowired
     private LocalAgentService localAgentService;
 
+    @Autowired
+    ExecuteCommand executeCommand;
+
     @RequestMapping("/index")
     public String getIndex(Model model, HttpServletRequest request) {
         Agent agent = localAgentService.getLatestInfo("192.168.15.1");
         model.addAttribute("cpu_free", agent.cpu_free);
         model.addAttribute("memory_free", agent.memory_free);
-//        String machineName = request.getParameter("machineName");
-//        System.out.println(machineName);
+        String commandRes = executeCommand.getCommandRes(request.getParameter("commandStr"));
+        model.addAttribute("commandRes", commandRes);
+        System.out.println(commandRes);
         return "index";
 
     }
