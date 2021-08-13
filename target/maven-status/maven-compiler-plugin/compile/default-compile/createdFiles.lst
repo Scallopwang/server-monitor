@@ -1,7 +1,0 @@
-com\guotai\servermonitorspringboot\utils\MyBatisUtils.class
-com\guotai\servermonitorspringboot\controller\RealTimeDataController.class
-com\guotai\servermonitorspringboot\ServerMonitorApplication.class
-com\guotai\servermonitorspringboot\service\ThriftAgentService.class
-com\guotai\servermonitorspringboot\service\LocalAgentService.class
-com\guotai\servermonitorspringboot\mapper\AgentMapper.class
-com\guotai\servermonitorspringboot\utils\ThriftServer.class
