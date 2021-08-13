@@ -16,6 +16,14 @@
     select * from monitor.agent where ip = #{ip} order by create_time desc limit 0,1;
     </select>
 
+    <select id="getAllTime" resultType="java.sql.Timestamp" parameterType="java.lang.String">
+    select create_time from monitor.agent where ip = #{ip};
+    </select>
+
+    <select id="getAllCpuFree" resultType="double" parameterType="java.lang.String">
+    select cpu_free from monitor.agent where ip = #{ip};
+    </select>
+
 
     <insert id="insertAgent" parameterType="thriftmonitor.Agent">
     insert into monitor.agent(ip,cpu_free,memory_free) values (#{ip},#{cpu_free},#{memory_free});

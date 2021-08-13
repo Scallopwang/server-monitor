@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thriftmonitor.Agent;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 @Service
 public class LocalAgentService {
 
@@ -26,6 +29,14 @@ public class LocalAgentService {
 
     public Agent getLatestInfo(String ip) {
         return agentMapper.getLatestInfo(ip);
+    }
+
+    public List<Timestamp> getAllTime(String ip){
+        return agentMapper.getAllTime(ip);
+    }
+
+    public List<Double> getAllCpuFree(String ip) {
+        return agentMapper.getAllCpuFree(ip);
     }
 
 }
