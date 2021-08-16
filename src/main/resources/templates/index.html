@@ -47,111 +47,121 @@
             <!-- Page Content -->
             <div class="container-fluid p-y-md">
 
-                <div th:id="header-main" style="overflow: hidden">
+                <div>
                     <form th:action="index" th:method="post">
-                        <div th:id="left" style="float: left;padding-left: 10%">
-                            <label th:for="commandinput">检索命令</label>
-                            <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
-                                   th:size="8">
-                        </div>
-                        <div style="float: left;padding-left: 5%">
-                            <button th:onclick="commandRes()" >查看指令结果</button>
-                        </div>
-                        <script th:inline="javascript">
-                            function commandRes() //声明标识符
-                            {
-                                var inputStr = [[${commandRes}]];
-                                alert(inputStr)
-                            }
-                        </script>
 
-                        <div th:id="right" style="float: left;padding-left: 10%">
-                            <label th:for="searchinput">搜索设备</label>
-                            <input th:id="searchinput" th:type="text" th:name="searchStr" th:placeholder="搜索内容"
-                                   th:size="8">
-                        </div>
-                        <div style="float: left;padding-left: 5%">
-                            <button th:onclick="searchRes()" >查看搜索结果</button>
-                        </div>
-                        <script th:inline="javascript">
-                            function searchRes() //声明标识符
-                            {
-                                alert("搜索结果为：")
-                            }
-                        </script>
+                        <div th:id="header-main" style="overflow: hidden">
 
-                        <div style="float: left;padding-left: 10%">
-                            <button type="submit" class="btn btn-default">提交</button>
+                            <div th:id="left" style="float: left;padding-left: 15%">
+                                <label th:for="commandinput">检索命令</label>
+                                <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
+                                       th:size="8">
+                            </div>
+                            <div style="float: left;padding-left: 3%">
+                                <button th:onclick="commandRes()">查看指令结果</button>
+                            </div>
+                            <script th:inline="javascript">
+                                function commandRes() //声明标识符
+                                {
+                                    var inputStr = [[${commandRes}]];
+                                    alert(inputStr)
+                                }
+                            </script>
+
+                            <div th:id="right" style="float: left;padding-left: 10%">
+                                <label th:for="searchinput">搜索设备</label>
+                                <input th:id="searchinput" th:type="text" th:name="searchStr" th:placeholder="搜索内容"
+                                       th:size="8">
+                            </div>
+                            <div style="float: left;padding-left: 3%">
+                                <button th:onclick="searchResFunc()">查看搜索结果</button>
+                            </div>
+                            <script th:inline="javascript">
+                                function searchResFunc() //声明标识符
+                                {
+                                    var inputStr = [[${searchRes}]];
+                                    alert("查询当前设备所属组别为：" + inputStr);
+                                }
+                            </script>
+
+                            <div style="float: left;padding-left: 30%">
+                                <button type="submit" style="width: 100px;background-color: #9fcaec" class="btn btn-default">提交
+                                </button>
+                            </div>
+
+                        </div>
+                        <hr>
+
+
+                        <div class="row">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-hover table-striped">
+
+                                        <form th:action="index" th:method="post">
+
+                                            <thead>
+                                            <tr>
+                                                <th>IP</th>
+                                                <th>CPU剩余量</th>
+                                                <th>memory剩余量</th>
+                                                <th>修改组别</th>
+                                                <th>修改备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+
+                                                <td>127.0.0.1</td>
+                                                <td th:text="${#numbers.formatDecimal(cpu_free*100,1,'COMMA',2,'POINT') + '%'}"></td>
+                                                <td th:text="${memory_free + 'M'}"></td>
+                                                <td>
+                                                    <input th:id="groupinputname1" th:type="text" th:name="groupName1"
+                                                           th:placeholder="请输入新组别" th:size="12">
+                                                </td>
+                                                <script language="javascript">
+                                                    function MsgBox() //声明标识符
+                                                    {
+                                                        alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
+                                                    }
+                                                </script>
+                                                <td>
+                                                    <input th:id="inputname" th:type="text" th:name="machineName1"
+                                                           th:placeholder="请输入备注" th:size="12">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>127.0.0.2</td>
+                                                <td>50%</td>
+                                                <td>50%</td>
+                                                <td>
+                                                    <input th:id="groupinputname2" th:type="text" th:name="groupName2"
+                                                           th:placeholder="请输入新组别" th:size="12">
+                                                </td>
+                                                <script language="javascript">
+                                                    function MsgBox() //声明标识符
+                                                    {
+                                                        alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
+                                                    }
+                                                </script>
+                                                <td>
+                                                    <input th:id="inputname" th:type="text" th:name="machineName2"
+                                                           th:placeholder="请输入备注" th:size="12">
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+
+                                        </form>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </form>
+
                 </div>
-                <hr>
 
-
-                <div class="row">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>IP</th>
-                                    <th>CPU剩余量</th>
-                                    <th>memory剩余量</th>
-                                    <th>磁盘剩余量</th>
-                                    <th>备注</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>127.0.0.1</td>
-                                    <td th:text="${#numbers.formatDecimal(cpu_free*100,1,'COMMA',2,'POINT') + '%'}"></td>
-                                    <td th:text="${memory_free + 'M'}"></td>
-                                    <td>
-                                        <button th:onclick="MsgBox()">查看</button>
-                                    </td>
-                                    <script language="javascript">
-                                        function MsgBox() //声明标识符
-                                        {
-                                            alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
-                                        }
-                                    </script>
-                                    <td>
-                                        <form th:action="index" th:method="post">
-                                            <input th:id="inputname" th:type="text" th:name="machineName"
-                                                   th:placeholder="请输入备注" th:size="8">
-                                            <button type="submit" class="btn btn-default">提交</button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>127.0.0.2</td>
-                                    <td>50%</td>
-                                    <td>50%</td>
-                                    <td>
-                                        <button th:onclick="MsgBox()">查看</button>
-                                    </td>
-                                    <script language="javascript">
-                                        function MsgBox() //声明标识符
-                                        {
-                                            alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
-                                        }
-                                    </script>
-                                    <td>
-                                        <form th:action="index" th:method="post">
-                                            <input th:id="inputname" th:type="text" th:name="machineName"
-                                                   th:placeholder="请输入备注" th:size="8">
-                                            <button type="submit" class="btn btn-default">提交</button>
-                                        </form>
-
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <!-- Company overview Chart -->
@@ -174,9 +184,6 @@
                                     var chartDom = document.getElementById('container');
                                     var myChart = echarts.init(chartDom);
                                     var option;
-
-                                    // var base = new Date(1988, 9, 3);
-                                    // var oneDay = 24 * 3600 * 1000;
 
                                     var date = [[${allTime}]];
                                     var data = [[${allCpuFree}]];

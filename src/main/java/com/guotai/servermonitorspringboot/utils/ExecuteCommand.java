@@ -14,6 +14,9 @@ import java.nio.charset.Charset;
 @Component
 public class ExecuteCommand {
     public String getCommandRes(String para) {
+        if (para == null) {
+            return null;
+        }
         try{
             String commandBaseStr = "cmd /C ";
             Process process=Runtime.getRuntime().exec(commandBaseStr+para);

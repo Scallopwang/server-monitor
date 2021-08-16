@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guotai.servermonitorspringboot.mapper.AgentGroupMapper">
+    <select id="getGroupByIP" resultType="Object" parameterType="java.lang.String">
+    select groupId from monitor.agent_group where ip = #{ip} or alias=#{ip};
+    </select>
+
+    <select id="getAliasByIP" resultType="Object" parameterType="java.lang.String">
+    select alias from monitor.agent_group where ip = #{ip};
+    </select>
+
+    <update id="updateAliasByIP" parameterType="com.guotai.servermonitorspringboot.entity.AgentGroup">
+    update monitor.agent_group set alias = #{alias} where ip = #{ip};
+    </update>
+
+    <update id="updateGroupByIP" parameterType="com.guotai.servermonitorspringboot.entity.AgentGroup">
+    update monitor.agent_group set groupId = #{groupId} where ip = #{ip};
+    </update>
+
+</mapper>

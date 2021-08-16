@@ -19,6 +19,7 @@ public class LocalAgentService {
     @Autowired
     private AgentMapper agentMapper;
 
+
     public Agent getAgentByIP(String ip) {
         return agentMapper.getAgentByIP(ip);
     }
@@ -31,7 +32,7 @@ public class LocalAgentService {
         return agentMapper.getLatestInfo(ip);
     }
 
-    public List<Timestamp> getAllTime(String ip){
+    public List<Timestamp> getAllTime(String ip) {
         return agentMapper.getAllTime(ip);
     }
 

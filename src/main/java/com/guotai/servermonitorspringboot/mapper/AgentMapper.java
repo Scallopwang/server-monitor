@@ -24,4 +24,6 @@ public interface AgentMapper {
     List<Timestamp> getAllTime(String ip);
 
     List<Double> getAllCpuFree(String ip);
+
+
 }

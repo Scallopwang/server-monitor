@@ -16,7 +16,7 @@ import thriftmonitor.AgentService;
 import thriftmonitor.DataException;
 
 
-@Controller
+@Service
 public class ThriftAgentService implements AgentService.Iface {
 
     @Autowired
@@ -38,11 +38,4 @@ public class ThriftAgentService implements AgentService.Iface {
     public String getCommand(String s) throws TException {
         return null;
     }
-
-    // 持久化到数据库
-//    public void saveData() {
-//        AgentMapper mapper = sqlSession.getMapper(AgentMapper.class);
-//        mapper.insertAgent(agent);
-//        sqlSession.close();
-//    }
 }
