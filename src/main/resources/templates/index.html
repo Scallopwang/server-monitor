@@ -44,15 +44,16 @@
     <div class="app-layout-container">
 
         <main class="app-layout-content">
+            <form th:action="index" th:method="post">
             <!-- Page Content -->
             <div class="container-fluid p-y-md">
 
                 <div>
-                    <form th:action="index" th:method="post">
+
 
                         <div th:id="header-main" style="overflow: hidden">
 
-                            <div th:id="left" style="float: left;padding-left: 15%">
+                            <div th:id="left" style="float: left;padding-left: 5%">
                                 <label th:for="commandinput">检索命令</label>
                                 <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
                                        th:size="8">
@@ -68,7 +69,7 @@
                                 }
                             </script>
 
-                            <div th:id="right" style="float: left;padding-left: 10%">
+                            <div th:id="right" style="float: left;padding-left: 8%">
                                 <label th:for="searchinput">搜索设备</label>
                                 <input th:id="searchinput" th:type="text" th:name="searchStr" th:placeholder="搜索内容"
                                        th:size="8">
@@ -83,9 +84,15 @@
                                     alert("查询当前设备所属组别为：" + inputStr);
                                 }
                             </script>
+                            <div style="float: left;padding-left: 10%">
+                                <label th:for="searchinput">采集频率</label>
+                                <input th:id="searchinput" th:type="text" th:name="collectFre" th:placeholder="秒"
+                                       th:size="8">
+                            </div>
 
-                            <div style="float: left;padding-left: 30%">
-                                <button type="submit" style="width: 100px;background-color: #9fcaec" class="btn btn-default">提交
+                            <div style="float: left;padding-left: 15%">
+                                <button type="submit" style="width: 100px;background-color: #9fcaec"
+                                        class="btn btn-default">提交
                                 </button>
                             </div>
 
@@ -98,7 +105,7 @@
                                 <div class="span12">
                                     <table class="table table-hover table-striped">
 
-                                        <form th:action="index" th:method="post">
+<!--                                        <form th:action="index" th:method="post">-->
 
                                             <thead>
                                             <tr>
@@ -153,12 +160,12 @@
 
                                             </tbody>
 
-                                        </form>
+<!--                                        </form>-->
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </form>
+
 
                 </div>
 
@@ -167,14 +174,17 @@
                     <!-- Company overview Chart -->
                     <div class="col-lg-8">
                         <div class="card">
-                            <div class="card-header bg-blue bg-inverse">
-                                <h4>CPU资源占用总览</h4>
-                                <ul class="card-actions">
-                                    <li>
-                                        <span class="label bg-green">Stat<span class="hidden-xs">istic</span>s <i
-                                                class="ion-connection-bars"></i></span>
-                                    </li>
-                                </ul>
+                            <div>
+                                <div style="float: left;padding-left: 1%; font-size: 25px" >
+                                    <strong>CPU资源占用总览</strong>
+                                </div>
+                                <div style="float: left;padding-left: 2%;padding-top: 5px">
+                                    <input th:id="inputCpuIp" th:type="text" th:name="cpuChooseIp"
+                                           th:placeholder="请输入ip" th:size="12">
+                                </div>
+                                <div style="float: left;padding-left: 2%;" ><b>开始日期</b><input type="date" name="cpu_date1" /></div>
+                                <div style="float: left;padding-left: 2%;" ><b>结束日期</b><input type="date" name="cpu_date2" /></div>
+
                             </div>
 
                             <div class="card-block p-b-0 bg-blue bg-inverse">
@@ -301,12 +311,6 @@
                         <div class="card">
                             <div class="card-header bg-blue bg-inverse">
                                 <h4>Memory占用总览</h4>
-                                <ul class="card-actions">
-                                    <li>
-                                        <span class="label bg-green">Stat<span class="hidden-xs">istic</span>s <i
-                                                class="ion-connection-bars"></i></span>
-                                    </li>
-                                </ul>
                             </div>
                             <div class="card-block p-b-0 bg-blue bg-inverse">
                                 <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
@@ -368,7 +372,7 @@
             </div>
             <!-- .container-fluid -->
             <!-- End Page Content -->
-
+            </form>
         </main>
 
     </div>
@@ -376,38 +380,6 @@
 </div>
 <!-- .app-layout-canvas -->
 
-<!-- Apps Modal -->
-<!-- Opens from the button in the header -->
-<div id="apps-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-sm modal-dialog modal-dialog-top">
-        <div class="modal-content">
-            <!-- Apps card -->
-            <div class="card m-b-0">
-                <div class="card-header bg-app bg-inverse">
-                    <h4>Apps</h4>
-                    <ul class="card-actions">
-                        <li>
-                            <button data-dismiss="modal" type="button"><i class="ion-close"></i></button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-block">
-                    <div class="row text-center">
-                        <div class="col-xs-6">
-                            <a class="card card-block m-b-0 bg-app-secondary bg-inverse" href="index.html">
-                                <i class="ion-speedometer fa-4x"></i>
-                                <p>Admin</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- .card-block -->
-            </div>
-            <!-- End Apps card -->
-        </div>
-    </div>
-</div>
-<!-- End Apps Modal -->
 
 
 <!-- Page JS Code -->

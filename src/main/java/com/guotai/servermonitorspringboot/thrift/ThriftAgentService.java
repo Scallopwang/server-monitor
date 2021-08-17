@@ -35,7 +35,14 @@ public class ThriftAgentService implements AgentService.Iface {
     }
 
     @Override
-    public String getCommand(String s) throws TException {
+    public String getCommand(String ip) throws TException {
         return null;
     }
+
+    @Override
+    public String getCollectFre(String ip) throws TException {
+        return null;
+    }
+
+
 }

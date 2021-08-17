@@ -62,21 +62,35 @@ public class RealTimeDataController {
             agentGroupService.updateGroupByIP(formMap.get("groupName1"), machineGroup.toString());
         }
 
-        // 执行指令
+        // 获取、执行指令
         String commandRes = executeCommand.getCommandRes(request.getParameter("commandStr"));
         model.addAttribute("commandRes", commandRes);
 
-        // 搜索设备
+        // 获取、搜索设备
         Object searchRes = agentGroupService.getGroupByIP(request.getParameter("searchStr"));
         model.addAttribute("searchRes", searchRes);
 
-        // 获取时间列表
-        List<Timestamp> allTime = localAgentService.getAllTime("192.168.15.1");
-        model.addAttribute("allTime", allTime.toArray());
+        String cpuChooseIp = request.getParameter("cpuChooseIp");
+        String cpu_date1 = request.getParameter("cpu_date1");
+        String cpu_date2 = request.getParameter("cpu_date2");
 
-        // 获取ip列表
-        List<Double> allCpuFree = localAgentService.getAllCpuFree("192.168.15.1");
-        model.addAttribute("allCpuFree", allCpuFree);
+        // 画图
+        // 获取时间列表 获取cpu使用列表
+        if (cpuChooseIp == null || cpuChooseIp.equals("")) {
+            List<Timestamp> allTime = localAgentService.getAllTime("192.168.15.1");
+            List<Double> allCpuFree = localAgentService.getAllCpuFree("192.168.15.1");
+            model.addAttribute("allTime", allTime.toArray());
+            model.addAttribute("allCpuFree", allCpuFree);
+        } else {
+            List<Timestamp> allTime = localAgentService.getAllTime(cpuChooseIp);
+            List<Double> allCpuFree = localAgentService.getAllCpuFree(cpuChooseIp);
+            model.addAttribute("allTime", allTime.toArray());
+            model.addAttribute("allCpuFree", allCpuFree);
+        }
+
+
+
+
 
         return "index";
     }
