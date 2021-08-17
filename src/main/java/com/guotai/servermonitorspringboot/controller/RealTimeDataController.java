@@ -8,6 +8,7 @@ package com.guotai.servermonitorspringboot.controller;
 import com.guotai.servermonitorspringboot.service.AgentGroupService;
 import com.guotai.servermonitorspringboot.service.LocalAgentService;
 import com.guotai.servermonitorspringboot.utils.ExecuteCommand;
+import com.guotai.servermonitorspringboot.utils.TimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class RealTimeDataController {
         put("machineName1", "192.168.15.1");
     }};
 
+    private Timestamp timestamp1;
+    private Timestamp timestamp2;
+
 
     @Autowired
     private LocalAgentService localAgentService;
@@ -37,6 +41,9 @@ public class RealTimeDataController {
 
     @Autowired
     ExecuteCommand executeCommand;
+
+    @Autowired
+    TimeFormat timeFormat;
 
     @RequestMapping("/index")
     public String getIndex(Model model, HttpServletRequest request) {
@@ -70,27 +77,41 @@ public class RealTimeDataController {
         Object searchRes = agentGroupService.getGroupByIP(request.getParameter("searchStr"));
         model.addAttribute("searchRes", searchRes);
 
+        // 获取ip、时间起止点画图
         String cpuChooseIp = request.getParameter("cpuChooseIp");
         String cpu_date1 = request.getParameter("cpu_date1");
         String cpu_date2 = request.getParameter("cpu_date2");
 
-        // 画图
-        // 获取时间列表 获取cpu使用列表
-        if (cpuChooseIp == null || cpuChooseIp.equals("")) {
+        if (cpuChooseIp != null && !cpuChooseIp.equals("") && cpu_date1 != null && !cpu_date1.equals("") && cpu_date2 != null && !cpu_date2.equals("")) {
+
+            timestamp1 = timeFormat.timeFormat(cpu_date1);
+            timestamp2 = timeFormat.timeFormat(cpu_date2);
+            List<Timestamp> timeSection = localAgentService.getTimeSection(cpuChooseIp, timestamp1, timestamp2);
+            List<Double> cpuFreeSection = localAgentService.getCpuFreeSection(cpuChooseIp, timestamp1, timestamp2);
+            model.addAttribute("allTime", timeSection.toArray());
+            model.addAttribute("allCpuFree", cpuFreeSection);
+        } else{
             List<Timestamp> allTime = localAgentService.getAllTime("192.168.15.1");
             List<Double> allCpuFree = localAgentService.getAllCpuFree("192.168.15.1");
-            model.addAttribute("allTime", allTime.toArray());
-            model.addAttribute("allCpuFree", allCpuFree);
-        } else {
-            List<Timestamp> allTime = localAgentService.getAllTime(cpuChooseIp);
-            List<Double> allCpuFree = localAgentService.getAllCpuFree(cpuChooseIp);
             model.addAttribute("allTime", allTime.toArray());
             model.addAttribute("allCpuFree", allCpuFree);
         }
 
 
-
-
+            // 画图
+            // 获取时间列表 获取cpu使用列表
+//            if (cpuChooseIp == null || cpuChooseIp.equals("")) {
+//                List<Timestamp> allTime = localAgentService.getAllTime("192.168.15.1");
+//                List<Double> allCpuFree = localAgentService.getAllCpuFree("192.168.15.1");
+//                model.addAttribute("allTime", allTime.toArray());
+//                model.addAttribute("allCpuFree", allCpuFree);
+//            } else {
+//                List<Timestamp> allTime = localAgentService.getAllTime(cpuChooseIp);
+//                List<Double> allCpuFree = localAgentService.getAllCpuFree(cpuChooseIp);
+//                model.addAttribute("allTime", allTime.toArray());
+//                model.addAttribute("allCpuFree", allCpuFree);
+//            }
+//
 
         return "index";
     }

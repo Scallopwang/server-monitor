@@ -1,9 +1,8 @@
 package com.guotai.servermonitorspringboot.mapper;
 
 
-
-
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import thriftmonitor.Agent;
 
@@ -24,6 +23,10 @@ public interface AgentMapper {
     List<Timestamp> getAllTime(String ip);
 
     List<Double> getAllCpuFree(String ip);
+
+    List<Timestamp> getTimeSection(@Param("ip") String ip, @Param("timestamp1") Timestamp timestamp1, @Param("timestamp2") Timestamp timestamp2);
+
+    List<Double> getCpuFreeSection(@Param("ip") String ip, @Param("timestamp1") Timestamp timestamp1, @Param("timestamp2") Timestamp timestamp2);
 
 
 }

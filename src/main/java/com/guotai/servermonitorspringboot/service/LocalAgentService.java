@@ -6,6 +6,7 @@
 package com.guotai.servermonitorspringboot.service;
 
 import com.guotai.servermonitorspringboot.mapper.AgentMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import thriftmonitor.Agent;
@@ -39,5 +40,14 @@ public class LocalAgentService {
     public List<Double> getAllCpuFree(String ip) {
         return agentMapper.getAllCpuFree(ip);
     }
+
+    public List<Timestamp> getTimeSection(String ip, Timestamp timestamp1, Timestamp timestamp2) {
+        return agentMapper.getTimeSection(ip, timestamp1, timestamp2);
+    }
+
+    public List<Double> getCpuFreeSection(String ip, Timestamp timestamp1, Timestamp timestamp2) {
+        return agentMapper.getCpuFreeSection(ip, timestamp1, timestamp2);
+    }
+
 
 }

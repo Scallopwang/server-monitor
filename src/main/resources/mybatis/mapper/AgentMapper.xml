@@ -24,6 +24,14 @@
     select cpu_free from monitor.agent where ip = #{ip};
     </select>
 
+    <select id="getTimeSection" resultType="java.sql.Timestamp">
+        SELECT create_time FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2});
+    </select>
+
+    <select id="getCpuFreeSection" resultType="double">
+        SELECT cpu_free FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2});
+    </select>
+
     <insert id="insertAgent" parameterType="thriftmonitor.Agent">
     insert into monitor.agent(ip,cpu_free,memory_free) values (#{ip},#{cpu_free},#{memory_free});
     </insert>
