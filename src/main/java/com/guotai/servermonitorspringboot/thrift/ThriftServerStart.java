@@ -3,7 +3,7 @@
 @Author: WZC
 @Date  : 2021-08-09 11:30
 */
-package com.guotai.servermonitorspringboot.utils;
+package com.guotai.servermonitorspringboot.thrift;
 
 import com.guotai.servermonitorspringboot.thrift.ThriftAgentService;
 import org.apache.thrift.TProcessorFactory;
@@ -20,11 +20,10 @@ import thriftmonitor.AgentService;
 
 
 @Component
-public class ThriftServer implements ApplicationListener<ContextRefreshedEvent> {
+public class ThriftServerStart implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private ThriftAgentService thriftAgentService;
-
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -41,8 +40,10 @@ public class ThriftServer implements ApplicationListener<ContextRefreshedEvent> 
         args1.protocolFactory(new TCompactProtocol.Factory());
         args1.transportFactory(new TFramedTransport.Factory());
         args1.processorFactory(new TProcessorFactory(AgentServiceProcessor));
+
         THsHaServer tHsHaServer = new THsHaServer(args1);
         System.out.println("server started");
         tHsHaServer.serve();
     }
+
 }

@@ -39,16 +39,29 @@
 
 </head>
 
-<body class="app-ui layout-has-drawer layout-has-fixed-header">
+<body class="app-ui layout-has-drawer layout-has-fixed-header" >
+<!--<script th:inline="javascript" language="javascript">-->
+<!--    function MsgBox() //声明标识符-->
+<!--    {-->
+<!--        var cpu = [[${cpu_free}]];-->
+<!--        var mem = [[${memory_free}]];-->
+<!--        if (cpu > 0.2) {-->
+<!--            alert("CPU占用资源过高！");-->
+<!--        }-->
+<!--        if (mem < 5000) {-->
+<!--            alert("内存资源不足！");-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 <div class="app-layout-canvas">
     <div class="app-layout-container">
 
         <main class="app-layout-content">
             <form th:action="index" th:method="post">
-            <!-- Page Content -->
-            <div class="container-fluid p-y-md">
+                <!-- Page Content -->
+                <div class="container-fluid p-y-md">
 
-                <div>
+                    <div>
 
 
                         <div th:id="header-main" style="overflow: hidden">
@@ -84,13 +97,13 @@
                                     alert("查询当前设备所属组别为：" + inputStr);
                                 }
                             </script>
-                            <div style="float: left;padding-left: 10%">
-                                <label th:for="searchinput">采集频率</label>
-                                <input th:id="searchinput" th:type="text" th:name="collectFre" th:placeholder="秒"
-                                       th:size="8">
-                            </div>
+                            <!--                            <div style="float: left;padding-left: 10%">-->
+                            <!--                                <label th:for="searchinput">采集频率</label>-->
+                            <!--                                <input th:id="searchinput" th:type="text" th:name="collectFre" th:placeholder="秒"-->
+                            <!--                                       th:size="8">-->
+                            <!--                            </div>-->
 
-                            <div style="float: left;padding-left: 15%">
+                            <div style="float: left;padding-left: 25%">
                                 <button type="submit" style="width: 100px;background-color: #9fcaec"
                                         class="btn btn-default">提交
                                 </button>
@@ -105,273 +118,273 @@
                                 <div class="span12">
                                     <table class="table table-hover table-striped">
 
-<!--                                        <form th:action="index" th:method="post">-->
+                                        <!--                                        <form th:action="index" th:method="post">-->
 
-                                            <thead>
-                                            <tr>
-                                                <th>IP</th>
-                                                <th>CPU剩余量</th>
-                                                <th>memory剩余量</th>
-                                                <th>修改组别</th>
-                                                <th>修改备注</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
 
-                                                <td>127.0.0.1</td>
-                                                <td th:text="${#numbers.formatDecimal(cpu_free*100,1,'COMMA',2,'POINT') + '%'}"></td>
-                                                <td th:text="${memory_free + 'M'}"></td>
-                                                <td>
-                                                    <input th:id="groupinputname1" th:type="text" th:name="groupName1"
-                                                           th:placeholder="请输入新组别" th:size="12">
-                                                </td>
-                                                <script language="javascript">
-                                                    function MsgBox() //声明标识符
-                                                    {
-                                                        alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
-                                                    }
-                                                </script>
-                                                <td>
-                                                    <input th:id="inputname" th:type="text" th:name="machineName1"
-                                                           th:placeholder="请输入备注" th:size="12">
-                                                </td>
+                                        <thead>
+                                        <tr>
+                                            <th>IP</th>
+                                            <th>CPU剩余量</th>
+                                            <th>memory剩余量</th>
+                                            <th>修改组别</th>
+                                            <th>修改备注</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
 
-                                            </tr>
-                                            <tr>
-                                                <td>127.0.0.2</td>
-                                                <td>50%</td>
-                                                <td>50%</td>
-                                                <td>
-                                                    <input th:id="groupinputname2" th:type="text" th:name="groupName2"
-                                                           th:placeholder="请输入新组别" th:size="12">
-                                                </td>
-                                                <script language="javascript">
-                                                    function MsgBox() //声明标识符
-                                                    {
-                                                        alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
-                                                    }
-                                                </script>
-                                                <td>
-                                                    <input th:id="inputname" th:type="text" th:name="machineName2"
-                                                           th:placeholder="请输入备注" th:size="12">
-                                                </td>
-                                            </tr>
+                                            <td>127.0.0.1</td>
+                                            <td th:text="${#numbers.formatDecimal(cpu_free*100,1,'COMMA',2,'POINT') + '%'}"></td>
+                                            <td th:text="${memory_free + 'M'}"></td>
+                                            <td>
+                                                <input th:id="groupinputname1" th:type="text" th:name="groupName1"
+                                                       th:placeholder="请输入新组别" th:size="12">
+                                            </td>
 
-                                            </tbody>
+                                            <td>
+                                                <input th:id="inputname" th:type="text" th:name="machineName1"
+                                                       th:placeholder="请输入备注" th:size="12">
+                                            </td>
 
-<!--                                        </form>-->
+                                        </tr>
+                                        <tr>
+                                            <td>127.0.0.2</td>
+                                            <td>50%</td>
+                                            <td>50%</td>
+                                            <td>
+                                                <input th:id="groupinputname2" th:type="text" th:name="groupName2"
+                                                       th:placeholder="请输入新组别" th:size="12">
+                                            </td>
+                                            <script language="javascript">
+                                                function MsgBox() //声明标识符
+                                                {
+                                                    alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
+                                                }
+                                            </script>
+                                            <td>
+                                                <input th:id="inputname" th:type="text" th:name="machineName2"
+                                                       th:placeholder="请输入备注" th:size="12">
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+
+                                        <!--                                        </form>-->
                                     </table>
                                 </div>
                             </div>
                         </div>
 
 
-                </div>
+                    </div>
 
 
-                <div class="row">
-                    <!-- Company overview Chart -->
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div>
-                                <div style="float: left;padding-left: 1%; font-size: 25px" >
-                                    <strong>CPU资源占用总览</strong>
+                    <div class="row">
+                        <!-- Company overview Chart -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div>
+                                    <div style="float: left;padding-left: 1%; font-size: 25px">
+                                        <strong>CPU资源占用总览</strong>
+                                    </div>
+                                    <div style="float: left;padding-left: 2%;padding-top: 5px">
+                                        <input th:id="inputCpuIp" th:type="text" th:name="cpuChooseIp"
+                                               th:placeholder="请输入ip" th:size="12">
+                                    </div>
+                                    <div style="float: left;padding-left: 2%;"><b>开始日期</b><input type="datetime-local"
+                                                                                                 name="cpu_date1"/>
+                                    </div>
+                                    <div style="float: left;padding-left: 2%;"><b>结束日期</b><input type="datetime-local"
+                                                                                                 name="cpu_date2"/>
+                                    </div>
+
                                 </div>
-                                <div style="float: left;padding-left: 2%;padding-top: 5px">
-                                    <input th:id="inputCpuIp" th:type="text" th:name="cpuChooseIp"
-                                           th:placeholder="请输入ip" th:size="12">
-                                </div>
-                                <div style="float: left;padding-left: 2%;" ><b>开始日期</b><input type="datetime-local" name="cpu_date1" /></div>
-                                <div style="float: left;padding-left: 2%;" ><b>结束日期</b><input type="datetime-local" name="cpu_date2" /></div>
 
-                            </div>
+                                <div class="card-block p-b-0 bg-blue bg-inverse">
+                                    <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                    <div id="container" style="height: 400px;"></div>
+                                    <script th:inline="javascript" type="text/javascript">
+                                        var chartDom = document.getElementById('container');
+                                        var myChart = echarts.init(chartDom);
+                                        var option;
 
-                            <div class="card-block p-b-0 bg-blue bg-inverse">
-                                <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                <div id="container" style="height: 400px;"></div>
-                                <script th:inline="javascript" type="text/javascript">
-                                    var chartDom = document.getElementById('container');
-                                    var myChart = echarts.init(chartDom);
-                                    var option;
+                                        var date = [[${allTime}]];
+                                        var data = [[${allCpuFree}]];
 
-                                    var date = [[${allTime}]];
-                                    var data = [[${allCpuFree}]];
+                                        console.log(date);
 
-                                    console.log(date);
-
-                                    option = {
-                                        tooltip: {
-                                            trigger: 'axis',
-                                            position: function (pt) {
-                                                return [pt[0], '10%'];
-                                            }
-                                        },
-                                        toolbox: {
-                                            feature: {
-                                                saveAsImage: {}
-                                            }
-                                        },
-                                        xAxis: {
-                                            type: 'category',
-                                            boundaryGap: false,
-                                            data: date
-                                        },
-                                        yAxis: {
-                                            type: 'value',
-                                            boundaryGap: [0, '100%']
-                                        },
-                                        grid: {
-                                            left: '5%',
-                                            right: '5%',
-                                            bottom: '20%',
-                                            top: '10%'
-                                        },
-                                        dataZoom: [{
-                                            type: 'inside',
-                                            start: 0,
-                                            end: 10
-                                        }, {
-                                            start: 0,
-                                            end: 10,
-                                            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                                            handleSize: '80%',
-                                            handleStyle: {
-                                                color: '#fff',
-                                                shadowBlur: 3,
-                                                shadowColor: 'rgba(0, 0, 0, 0.6)',
-                                                shadowOffsetX: 2,
-                                                shadowOffsetY: 2
-                                            }
-                                        }],
-                                        series: [
-                                            {
-                                                name: '模拟数据',
-                                                type: 'line',
-                                                smooth: true,
-                                                symbol: 'none',
-                                                sampling: 'average',
-                                                itemStyle: {
-                                                    color: 'rgb(255, 70, 131)'
-                                                },
-                                                areaStyle: {
-                                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                        offset: 0,
-                                                        color: 'rgb(255, 158, 68)'
-                                                    }, {
-                                                        offset: 1,
+                                        option = {
+                                            tooltip: {
+                                                trigger: 'axis',
+                                                position: function (pt) {
+                                                    return [pt[0], '10%'];
+                                                }
+                                            },
+                                            toolbox: {
+                                                feature: {
+                                                    saveAsImage: {}
+                                                }
+                                            },
+                                            xAxis: {
+                                                type: 'category',
+                                                boundaryGap: false,
+                                                data: date
+                                            },
+                                            yAxis: {
+                                                type: 'value',
+                                                boundaryGap: [0, '100%']
+                                            },
+                                            grid: {
+                                                left: '5%',
+                                                right: '5%',
+                                                bottom: '20%',
+                                                top: '10%'
+                                            },
+                                            dataZoom: [{
+                                                type: 'inside',
+                                                start: 0,
+                                                end: 10
+                                            }, {
+                                                start: 0,
+                                                end: 10,
+                                                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                                                handleSize: '80%',
+                                                handleStyle: {
+                                                    color: '#fff',
+                                                    shadowBlur: 3,
+                                                    shadowColor: 'rgba(0, 0, 0, 0.6)',
+                                                    shadowOffsetX: 2,
+                                                    shadowOffsetY: 2
+                                                }
+                                            }],
+                                            series: [
+                                                {
+                                                    name: '模拟数据',
+                                                    type: 'line',
+                                                    smooth: true,
+                                                    symbol: 'none',
+                                                    sampling: 'average',
+                                                    itemStyle: {
                                                         color: 'rgb(255, 70, 131)'
-                                                    }])
-                                                },
-                                                data: data
-                                            }
-                                        ]
-                                    };
+                                                    },
+                                                    areaStyle: {
+                                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                            offset: 0,
+                                                            color: 'rgb(255, 158, 68)'
+                                                        }, {
+                                                            offset: 1,
+                                                            color: 'rgb(255, 70, 131)'
+                                                        }])
+                                                    },
+                                                    data: data
+                                                }
+                                            ]
+                                        };
 
-                                    // 使用刚指定的配置项和数据显示图表。
-                                    myChart.setOption(option);
-                                </script>
+                                        // 使用刚指定的配置项和数据显示图表。
+                                        myChart.setOption(option);
+                                    </script>
 
+                                </div>
+
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-lg-3 b-r">
+                                            <p class="h6 small text-muted">历史最大占用率</p>
+                                            <p class="h3 m-t-0 m-b-md">+214.22</p>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                            <p class="h6 small text-muted">历史最小占用率</p>
+                                            <p class="h3 m-t-0 m-b-md">$28.74M</p>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                            <p class="h6 small text-muted">历史平均占用率</p>
+                                            <p class="h3 m-t-0 m-b-md">+74%</p>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3">
+                                            <p class="h6 small text-muted">状态是否正常</p>
+                                            <p class="h3 m-t-0 m-b-md">$74.23M</p>
+                                        </div>
+                                    </div>
+                                    <!-- .row -->
+                                </div>
+                                <!-- .card-block -->
                             </div>
+                            <!-- .card -->
+                        </div>
+                        <!-- .col-lg-8 -->
+                        <!-- End Company overview Chart -->
 
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-xs-6 col-lg-3 b-r">
-                                        <p class="h6 small text-muted">历史最大占用率</p>
-                                        <p class="h3 m-t-0 m-b-md">+214.22</p>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                        <p class="h6 small text-muted">历史最小占用率</p>
-                                        <p class="h3 m-t-0 m-b-md">$28.74M</p>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                        <p class="h6 small text-muted">历史平均占用率</p>
-                                        <p class="h3 m-t-0 m-b-md">+74%</p>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3">
-                                        <p class="h6 small text-muted">状态是否正常</p>
-                                        <p class="h3 m-t-0 m-b-md">$74.23M</p>
+                    </div>
+                    <!-- .row -->
+
+                    <div class="row">
+                        <!-- Company overview Chart -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header bg-blue bg-inverse">
+                                    <h4>Memory占用总览</h4>
+                                </div>
+                                <div class="card-block p-b-0 bg-blue bg-inverse">
+                                    <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
+                                    <div style="height: 200px;">
+                                        <canvas class="js-chartjs-lines1"></canvas>
                                     </div>
                                 </div>
-                                <!-- .row -->
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-lg-3 b-r">
+                                            <p class="h6 small text-muted">Yearly change</p>
+                                            <p class="h3 m-t-0 m-b-md">+214.22</p>
+                                            <div class="progress progress-mini m-b-sm">
+                                                <div class="progress-bar progress-bar-green" role="progressbar"
+                                                     aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 76%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                            <p class="h6 small text-muted">Shares trade</p>
+                                            <p class="h3 m-t-0 m-b-md">$28.74M</p>
+                                            <div class="progress progress-mini m-b-sm">
+                                                <div class="progress-bar progress-bar-green" role="progressbar"
+                                                     aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 84%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
+                                            <p class="h6 small text-muted">Yearly change</p>
+                                            <p class="h3 m-t-0 m-b-md">+74%</p>
+                                            <div class="progress progress-mini m-b-sm">
+                                                <div class="progress-bar progress-bar-green" role="progressbar"
+                                                     aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 74%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-lg-3">
+                                            <p class="h6 small text-muted">Total revenue</p>
+                                            <p class="h3 m-t-0 m-b-md">$74.23M</p>
+                                            <div class="progress progress-mini m-b-sm">
+                                                <div class="progress-bar progress-bar-green" role="progressbar"
+                                                     aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 90%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .row -->
+                                </div>
+                                <!-- .card-block -->
                             </div>
-                            <!-- .card-block -->
+                            <!-- .card -->
                         </div>
-                        <!-- .card -->
+                        <!-- .col-lg-8 -->
+                        <!-- End Company overview Chart -->
+
                     </div>
-                    <!-- .col-lg-8 -->
-                    <!-- End Company overview Chart -->
+                    <!-- .row -->
 
                 </div>
-                <!-- .row -->
-
-                <div class="row">
-                    <!-- Company overview Chart -->
-                    <div class="col-lg-8">
-                        <div class="card">
-                            <div class="card-header bg-blue bg-inverse">
-                                <h4>Memory占用总览</h4>
-                            </div>
-                            <div class="card-block p-b-0 bg-blue bg-inverse">
-                                <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                <div style="height: 200px;">
-                                    <canvas class="js-chartjs-lines1"></canvas>
-                                </div>
-                            </div>
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-xs-6 col-lg-3 b-r">
-                                        <p class="h6 small text-muted">Yearly change</p>
-                                        <p class="h3 m-t-0 m-b-md">+214.22</p>
-                                        <div class="progress progress-mini m-b-sm">
-                                            <div class="progress-bar progress-bar-green" role="progressbar"
-                                                 aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 76%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                        <p class="h6 small text-muted">Shares trade</p>
-                                        <p class="h3 m-t-0 m-b-md">$28.74M</p>
-                                        <div class="progress progress-mini m-b-sm">
-                                            <div class="progress-bar progress-bar-green" role="progressbar"
-                                                 aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 84%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                        <p class="h6 small text-muted">Yearly change</p>
-                                        <p class="h3 m-t-0 m-b-md">+74%</p>
-                                        <div class="progress progress-mini m-b-sm">
-                                            <div class="progress-bar progress-bar-green" role="progressbar"
-                                                 aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 74%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-lg-3">
-                                        <p class="h6 small text-muted">Total revenue</p>
-                                        <p class="h3 m-t-0 m-b-md">$74.23M</p>
-                                        <div class="progress progress-mini m-b-sm">
-                                            <div class="progress-bar progress-bar-green" role="progressbar"
-                                                 aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 90%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .row -->
-                            </div>
-                            <!-- .card-block -->
-                        </div>
-                        <!-- .card -->
-                    </div>
-                    <!-- .col-lg-8 -->
-                    <!-- End Company overview Chart -->
-
-                </div>
-                <!-- .row -->
-
-            </div>
-            <!-- .container-fluid -->
-            <!-- End Page Content -->
+                <!-- .container-fluid -->
+                <!-- End Page Content -->
             </form>
         </main>
 
@@ -379,7 +392,6 @@
     <!-- .app-layout-container -->
 </div>
 <!-- .app-layout-canvas -->
-
 
 
 <!-- Page JS Code -->

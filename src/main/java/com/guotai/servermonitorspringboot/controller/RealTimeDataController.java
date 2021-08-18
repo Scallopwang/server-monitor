@@ -5,8 +5,10 @@
 */
 package com.guotai.servermonitorspringboot.controller;
 
+import com.guotai.servermonitorspringboot.entity.ThriftCommunication;
 import com.guotai.servermonitorspringboot.service.AgentGroupService;
 import com.guotai.servermonitorspringboot.service.LocalAgentService;
+import com.guotai.servermonitorspringboot.thrift.ThriftClientStart;
 import com.guotai.servermonitorspringboot.utils.ExecuteCommand;
 import com.guotai.servermonitorspringboot.utils.TimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,6 @@ public class RealTimeDataController {
         put("machineName1", "192.168.15.1");
     }};
 
-    private Timestamp timestamp1;
-    private Timestamp timestamp2;
-
 
     @Autowired
     private LocalAgentService localAgentService;
@@ -40,10 +39,13 @@ public class RealTimeDataController {
     private AgentGroupService agentGroupService;
 
     @Autowired
-    ExecuteCommand executeCommand;
+    private TimeFormat timeFormat;
 
     @Autowired
-    TimeFormat timeFormat;
+    private ThriftClientStart thriftClientStart;
+
+    @Autowired
+    private ThriftCommunication thriftCommunication;
 
     @RequestMapping("/index")
     public String getIndex(Model model, HttpServletRequest request) {
@@ -70,8 +72,13 @@ public class RealTimeDataController {
         }
 
         // 获取、执行指令
-        String commandRes = executeCommand.getCommandRes(request.getParameter("commandStr"));
-        model.addAttribute("commandRes", commandRes);
+//        String commandRes = executeCommand.getCommandRes(request.getParameter("commandStr"));
+//        model.addAttribute("commandRes", commandRes);
+        // 传送指令至agent
+        thriftClientStart.clientStart(request.getParameter("commandStr"));
+        // 结果传入前端
+        model.addAttribute("commandRes", thriftCommunication.getCommandRes());
+
 
         // 获取、搜索设备
         Object searchRes = agentGroupService.getGroupByIP(request.getParameter("searchStr"));
@@ -84,8 +91,8 @@ public class RealTimeDataController {
 
         if (cpuChooseIp != null && !cpuChooseIp.equals("") && cpu_date1 != null && !cpu_date1.equals("") && cpu_date2 != null && !cpu_date2.equals("")) {
 
-            timestamp1 = timeFormat.timeFormat(cpu_date1);
-            timestamp2 = timeFormat.timeFormat(cpu_date2);
+            Timestamp timestamp1 = timeFormat.timeFormat(cpu_date1);
+            Timestamp timestamp2 = timeFormat.timeFormat(cpu_date2);
             List<Timestamp> timeSection = localAgentService.getTimeSection(cpuChooseIp, timestamp1, timestamp2);
             List<Double> cpuFreeSection = localAgentService.getCpuFreeSection(cpuChooseIp, timestamp1, timestamp2);
             model.addAttribute("allTime", timeSection.toArray());
@@ -96,22 +103,6 @@ public class RealTimeDataController {
             model.addAttribute("allTime", allTime.toArray());
             model.addAttribute("allCpuFree", allCpuFree);
         }
-
-
-            // 画图
-            // 获取时间列表 获取cpu使用列表
-//            if (cpuChooseIp == null || cpuChooseIp.equals("")) {
-//                List<Timestamp> allTime = localAgentService.getAllTime("192.168.15.1");
-//                List<Double> allCpuFree = localAgentService.getAllCpuFree("192.168.15.1");
-//                model.addAttribute("allTime", allTime.toArray());
-//                model.addAttribute("allCpuFree", allCpuFree);
-//            } else {
-//                List<Timestamp> allTime = localAgentService.getAllTime(cpuChooseIp);
-//                List<Double> allCpuFree = localAgentService.getAllCpuFree(cpuChooseIp);
-//                model.addAttribute("allTime", allTime.toArray());
-//                model.addAttribute("allCpuFree", allCpuFree);
-//            }
-//
 
         return "index";
     }
