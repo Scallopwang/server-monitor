@@ -49,5 +49,13 @@ public class LocalAgentService {
         return agentMapper.getCpuFreeSection(ip, timestamp1, timestamp2);
     }
 
+    public List<Timestamp> getLastTimeSection(String ip) {
+        return agentMapper.getLastTimeSection(ip);
+    }
+
+    public List<Double> getLastCpuFreeSection(String ip) {
+        return agentMapper.getLastCpuFreeSection(ip);
+    }
+
 
 }

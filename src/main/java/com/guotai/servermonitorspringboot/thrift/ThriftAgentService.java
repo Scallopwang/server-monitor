@@ -25,7 +25,7 @@ public class ThriftAgentService implements AgentService.Iface {
 
     @Override
     public Agent sendAgentByIP(String ip, Agent agent) throws DataException, TException {
-        System.out.println("server：" + agent.toString());
+//        System.out.println("server：" + agent.toString());
         try {
             localAgentService.insertAgent(agent);
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class ThriftAgentService implements AgentService.Iface {
 
     @Override
     public void sendMsg(String msg) throws TException {
-        System.out.println("接收agent信息为：" + msg);
+//        System.out.println("接收agent信息为：" + msg);
         thriftCommunication.setCommandRes(msg);
     }
 

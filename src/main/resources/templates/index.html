@@ -36,23 +36,41 @@
 
     <script src="js/pages/index.js"></script>
     <script src="js/echarts.js"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 
 </head>
 
-<body class="app-ui layout-has-drawer layout-has-fixed-header" >
-<!--<script th:inline="javascript" language="javascript">-->
-<!--    function MsgBox() //声明标识符-->
-<!--    {-->
-<!--        var cpu = [[${cpu_free}]];-->
-<!--        var mem = [[${memory_free}]];-->
-<!--        if (cpu > 0.2) {-->
-<!--            alert("CPU占用资源过高！");-->
-<!--        }-->
-<!--        if (mem < 5000) {-->
-<!--            alert("内存资源不足！");-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
+<body class="app-ui layout-has-drawer layout-has-fixed-header" th:onload="drawChart()">
+<script th:inline="javascript" language="javascript">
+    var task = setInterval("warning()", 2000)
+
+    function warning() //声明标识符
+    {
+        $.ajax({
+            url: '/cpuInfo',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                //方法中传入的参数data为后台获取的数据
+                if (data > 80) {
+                    alert("当前CPU占用峰值为：" + data + "%，CPU占用资源过高！");
+                }
+            }
+        })
+
+        $.ajax({
+            url: '/memInfo',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                //方法中传入的参数data为后台获取的数据
+                if (data < 2000) {
+                    alert("内存资源不足！");
+                }
+            }
+        })
+    }
+</script>
 <div class="app-layout-canvas">
     <div class="app-layout-container">
 
@@ -60,12 +78,8 @@
             <form th:action="index" th:method="post">
                 <!-- Page Content -->
                 <div class="container-fluid p-y-md">
-
                     <div>
-
-
                         <div th:id="header-main" style="overflow: hidden">
-
                             <div th:id="left" style="float: left;padding-left: 5%">
                                 <label th:for="commandinput">检索命令</label>
                                 <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
@@ -97,11 +111,6 @@
                                     alert("查询当前设备所属组别为：" + inputStr);
                                 }
                             </script>
-                            <!--                            <div style="float: left;padding-left: 10%">-->
-                            <!--                                <label th:for="searchinput">采集频率</label>-->
-                            <!--                                <input th:id="searchinput" th:type="text" th:name="collectFre" th:placeholder="秒"-->
-                            <!--                                       th:size="8">-->
-                            <!--                            </div>-->
 
                             <div style="float: left;padding-left: 25%">
                                 <button type="submit" style="width: 100px;background-color: #9fcaec"
@@ -112,15 +121,12 @@
                         </div>
                         <hr>
 
-
                         <div class="row">
                             <div class="row-fluid">
                                 <div class="span12">
                                     <table class="table table-hover table-striped">
 
                                         <!--                                        <form th:action="index" th:method="post">-->
-
-
                                         <thead>
                                         <tr>
                                             <th>IP</th>
@@ -132,20 +138,51 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-
                                             <td>127.0.0.1</td>
-                                            <td th:text="${#numbers.formatDecimal(cpu_free*100,1,'COMMA',2,'POINT') + '%'}"></td>
-                                            <td th:text="${memory_free + 'M'}"></td>
+                                            <td th:id="cpuId1"></td>
+                                            <script>
+                                                var task_cpu1 = setInterval("getCpu1()", 2000)
+
+                                                function getCpu1() {
+                                                    $.ajax({
+                                                        url: '/cpuInfo',
+                                                        type: 'get',
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            //方法中传入的参数data为后台获取的数据
+                                                            // console.log(data);
+                                                            $("#cpuId1").html(data + "%"); //在html页面id=test的标签里显示html内容
+                                                        }
+                                                    })
+
+                                                }
+                                            </script>
+
+                                            <td th:id="memId1"></td>
+                                            <script>
+                                                var task_mem1 = setInterval("getMem1()", 2000)
+
+                                                function getMem1() {
+                                                    $.ajax({
+                                                        url: '/memInfo',
+                                                        type: 'get',
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            //方法中传入的参数data为后台获取的数据
+                                                            // console.log(data);
+                                                            $("#memId1").html(data + "M"); //在html页面id=test的标签里显示html内容
+                                                        }
+                                                    })
+                                                }
+                                            </script>
                                             <td>
                                                 <input th:id="groupinputname1" th:type="text" th:name="groupName1"
                                                        th:placeholder="请输入新组别" th:size="12">
                                             </td>
-
                                             <td>
-                                                <input th:id="inputname" th:type="text" th:name="machineName1"
+                                                <input th:id="aliasinputname1" th:type="text" th:name="machineName1"
                                                        th:placeholder="请输入备注" th:size="12">
                                             </td>
-
                                         </tr>
                                         <tr>
                                             <td>127.0.0.2</td>
@@ -155,14 +192,8 @@
                                                 <input th:id="groupinputname2" th:type="text" th:name="groupName2"
                                                        th:placeholder="请输入新组别" th:size="12">
                                             </td>
-                                            <script language="javascript">
-                                                function MsgBox() //声明标识符
-                                                {
-                                                    alert("弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试\n弹窗测试")
-                                                }
-                                            </script>
                                             <td>
-                                                <input th:id="inputname" th:type="text" th:name="machineName2"
+                                                <input th:id="aliasinputname2" th:type="text" th:name="machineName2"
                                                        th:placeholder="请输入备注" th:size="12">
                                             </td>
                                         </tr>
@@ -183,107 +214,134 @@
                         <!-- Company overview Chart -->
                         <div class="col-lg-8">
                             <div class="card">
-                                <div>
-                                    <div style="float: left;padding-left: 1%; font-size: 25px">
-                                        <strong>CPU资源占用总览</strong>
-                                    </div>
-                                    <div style="float: left;padding-left: 2%;padding-top: 5px">
-                                        <input th:id="inputCpuIp" th:type="text" th:name="cpuChooseIp"
-                                               th:placeholder="请输入ip" th:size="12">
-                                    </div>
-                                    <div style="float: left;padding-left: 2%;"><b>开始日期</b><input type="datetime-local"
-                                                                                                 name="cpu_date1"/>
-                                    </div>
-                                    <div style="float: left;padding-left: 2%;"><b>结束日期</b><input type="datetime-local"
-                                                                                                 name="cpu_date2"/>
+                                    <div th:id="chartHead">
+                                        <form th:id="formChartData" method="post">
+                                        <div style="float: left;padding-left: 1%; font-size: 25px">
+                                            <strong>CPU资源占用总览</strong>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;padding-top: 5px">
+                                            <input th:id="inputCpuIp" th:type="text" name="cpuChooseIp" th:placeholder="请输入ip" th:size="12" value="">
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;">
+                                            <b>开始日期</b>
+                                            <input type="datetime-local" th:id="startDate" name="cpu_date1" value=""/>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;"><b>结束日期</b><input type="datetime-local" th:id="endDate" name="cpu_date2" value=""/>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;">
+                                            <select th:id="selectId" name="timeChoice" value="">
+                                                <option value="day">天</option>
+                                                <option value="hour">时</option>
+                                                <option value="minute">分</option>
+                                            </select>
+                                        </div>
+
+                                        <div style="float: left;padding-left: 20%;">
+                                            <button type="button" th:onclick="drawChart()">提交配置</button>&nbsp<input type="reset" value="重置">
+                                        </div>
+                                        </form>
                                     </div>
 
-                                </div>
 
                                 <div class="card-block p-b-0 bg-blue bg-inverse">
                                     <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                    <div id="container" style="height: 400px;"></div>
-                                    <script th:inline="javascript" type="text/javascript">
-                                        var chartDom = document.getElementById('container');
-                                        var myChart = echarts.init(chartDom);
-                                        var option;
-
-                                        var date = [[${allTime}]];
-                                        var data = [[${allCpuFree}]];
-
-                                        console.log(date);
-
-                                        option = {
-                                            tooltip: {
-                                                trigger: 'axis',
-                                                position: function (pt) {
-                                                    return [pt[0], '10%'];
-                                                }
-                                            },
-                                            toolbox: {
-                                                feature: {
-                                                    saveAsImage: {}
-                                                }
-                                            },
-                                            xAxis: {
-                                                type: 'category',
-                                                boundaryGap: false,
-                                                data: date
-                                            },
-                                            yAxis: {
-                                                type: 'value',
-                                                boundaryGap: [0, '100%']
-                                            },
-                                            grid: {
-                                                left: '5%',
-                                                right: '5%',
-                                                bottom: '20%',
-                                                top: '10%'
-                                            },
-                                            dataZoom: [{
-                                                type: 'inside',
-                                                start: 0,
-                                                end: 10
-                                            }, {
-                                                start: 0,
-                                                end: 10,
-                                                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
-                                                handleSize: '80%',
-                                                handleStyle: {
-                                                    color: '#fff',
-                                                    shadowBlur: 3,
-                                                    shadowColor: 'rgba(0, 0, 0, 0.6)',
-                                                    shadowOffsetX: 2,
-                                                    shadowOffsetY: 2
-                                                }
-                                            }],
-                                            series: [
-                                                {
-                                                    name: '模拟数据',
-                                                    type: 'line',
-                                                    smooth: true,
-                                                    symbol: 'none',
-                                                    sampling: 'average',
-                                                    itemStyle: {
-                                                        color: 'rgb(255, 70, 131)'
+                                    <div id="container" style="height: 400px;" >
+                                        <script th:inline="javascript" type="text/javascript" >
+                                            function drawChart() {
+                                                $.ajax({
+                                                    url: '/drawCharts',
+                                                    type: 'post',
+                                                    dataType: 'json',
+                                                    async: true,
+                                                    data:{'cpuChooseIp':$('#inputCpuIp').val(),
+                                                        'cpu_date1':$('#startDate').val(),
+                                                        'cpu_date2':$('#endDate').val(),
+                                                        'timeChoice':$('#selectId').val(),
                                                     },
-                                                    areaStyle: {
-                                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                                            offset: 0,
-                                                            color: 'rgb(255, 158, 68)'
-                                                        }, {
-                                                            offset: 1,
-                                                            color: 'rgb(255, 70, 131)'
-                                                        }])
-                                                    },
-                                                    data: data
-                                                }
-                                            ]
-                                        };
+                                                    success: function (res) {
+                                                        var date = res["timeSection"];
+                                                        var data = res["cpuFreeSection"];
+                                                        var chartDom = document.getElementById('container');
+                                                        var myChart = echarts.init(chartDom);
+                                                        var option;
+                                                        option = {
+                                                            tooltip: {
+                                                                trigger: 'axis',
+                                                                position: function (pt) {
+                                                                    return [pt[0], '10%'];
+                                                                }
+                                                            },
+                                                            toolbox: {
+                                                                feature: {
+                                                                    saveAsImage: {}
+                                                                }
+                                                            },
+                                                            xAxis: {
+                                                                type: 'category',
+                                                                boundaryGap: false,
+                                                                data: date
+                                                            },
+                                                            yAxis: {
+                                                                type: 'value',
+                                                                boundaryGap: [0, '100%']
+                                                            },
+                                                            grid: {
+                                                                left: '5%',
+                                                                right: '5%',
+                                                                bottom: '20%',
+                                                                top: '10%'
+                                                            },
+                                                            dataZoom: [{
+                                                                type: 'inside',
+                                                                start: 0,
+                                                                end: 10
+                                                            }, {
+                                                                start: 0,
+                                                                end: 10,
+                                                                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                                                                handleSize: '80%',
+                                                                handleStyle: {
+                                                                    color: '#fff',
+                                                                    shadowBlur: 3,
+                                                                    shadowColor: 'rgba(0, 0, 0, 0.6)',
+                                                                    shadowOffsetX: 2,
+                                                                    shadowOffsetY: 2
+                                                                }
+                                                            }],
+                                                            series: [
+                                                                {
+                                                                    name: '模拟数据',
+                                                                    type: 'line',
+                                                                    smooth: true,
+                                                                    symbol: 'none',
+                                                                    sampling: 'average',
+                                                                    itemStyle: {
+                                                                        color: 'rgb(255, 70, 131)'
+                                                                    },
+                                                                    areaStyle: {
+                                                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                                            offset: 0,
+                                                                            color: 'rgb(255, 158, 68)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgb(255, 70, 131)'
+                                                                        }])
+                                                                    },
+                                                                    data: data
+                                                                }
+                                                            ]
+                                                        };
+                                                        myChart.setOption(option);
+                                                    }
+                                                })
 
-                                        // 使用刚指定的配置项和数据显示图表。
-                                        myChart.setOption(option);
-                                    </script>
+
+
+                                            }
+                                        </script>
+
+                                    </div>
+
 
                                 </div>
 

@@ -28,5 +28,10 @@ public interface AgentMapper {
 
     List<Double> getCpuFreeSection(@Param("ip") String ip, @Param("timestamp1") Timestamp timestamp1, @Param("timestamp2") Timestamp timestamp2);
 
+    List<Timestamp> getLastTimeSection(@Param("ip") String ip);
+
+    List<Double> getLastCpuFreeSection(@Param("ip") String ip);
+
+
 
 }
