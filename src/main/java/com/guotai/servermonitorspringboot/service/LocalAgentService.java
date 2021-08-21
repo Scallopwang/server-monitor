@@ -41,12 +41,16 @@ public class LocalAgentService {
         return agentMapper.getAllCpuFree(ip);
     }
 
-    public List<Timestamp> getTimeSection(String ip, Timestamp timestamp1, Timestamp timestamp2) {
-        return agentMapper.getTimeSection(ip, timestamp1, timestamp2);
+    public List<Timestamp> getTimeSection(String ip, Timestamp timestamp1, Timestamp timestamp2, String timeChoice) {
+        return agentMapper.getTimeSection(ip, timestamp1, timestamp2, timeChoice);
     }
 
-    public List<Double> getCpuFreeSection(String ip, Timestamp timestamp1, Timestamp timestamp2) {
-        return agentMapper.getCpuFreeSection(ip, timestamp1, timestamp2);
+    public List<Double> getCpuFreeSection(String ip, Timestamp timestamp1, Timestamp timestamp2, String timeChoice) {
+        return agentMapper.getCpuFreeSection(ip, timestamp1, timestamp2, timeChoice);
+    }
+
+    public List<Double> getMemFreeSection(String ip, Timestamp timestamp1, Timestamp timestamp2, String timeChoice) {
+        return agentMapper.getMemFreeSection(ip, timestamp1, timestamp2, timeChoice);
     }
 
     public List<Timestamp> getLastTimeSection(String ip) {
@@ -57,5 +61,8 @@ public class LocalAgentService {
         return agentMapper.getLastCpuFreeSection(ip);
     }
 
+    public List<Double> getLastMemFreeSection(String ip) {
+        return agentMapper.getLastMemFreeSection(ip);
+    }
 
 }

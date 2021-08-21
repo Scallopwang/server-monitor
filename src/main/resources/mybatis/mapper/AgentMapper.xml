@@ -25,11 +25,15 @@
     </select>
 
     <select id="getTimeSection" resultType="java.sql.Timestamp">
-        SELECT create_time FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2});
+        SELECT create_time FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2}) AND create_time = DATE_FORMAT(create_time, #{timeChoice});
     </select>
 
     <select id="getCpuFreeSection" resultType="double">
-        SELECT cpu_free FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2});
+        SELECT cpu_free FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2}) AND create_time = DATE_FORMAT(create_time, #{timeChoice});
+    </select>
+
+    <select id="getMemFreeSection" resultType="double">
+        SELECT memory_free FROM monitor.agent WHERE ip = #{ip} and UNIX_TIMESTAMP(create_time) between UNIX_TIMESTAMP(#{timestamp1}) AND UNIX_TIMESTAMP(#{timestamp2}) AND create_time = DATE_FORMAT(create_time, #{timeChoice});
     </select>
 
     <select id="getLastTimeSection" resultType="java.sql.Timestamp">
@@ -38,6 +42,10 @@
 
     <select id="getLastCpuFreeSection" resultType="double">
         SELECT cpu_free FROM monitor.agent WHERE ip = #{ip} and DATE_SUB(CURDATE(), INTERVAL 2 DAY) &lt;= date(create_time);
+    </select>
+
+    <select id="getLastMemFreeSection" resultType="double">
+        SELECT memory_free FROM monitor.agent WHERE ip = #{ip} and DATE_SUB(CURDATE(), INTERVAL 2 DAY) &lt;= date(create_time);
     </select>
 
 

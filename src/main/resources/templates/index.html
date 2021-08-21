@@ -40,7 +40,7 @@
 
 </head>
 
-<body class="app-ui layout-has-drawer layout-has-fixed-header" th:onload="drawChart()">
+<body class="app-ui layout-has-drawer layout-has-fixed-header" onload="drawChart();memDrawChart()">
 <script th:inline="javascript" language="javascript">
     var task = setInterval("warning()", 2000)
 
@@ -80,19 +80,33 @@
                 <div class="container-fluid p-y-md">
                     <div>
                         <div th:id="header-main" style="overflow: hidden">
-                            <div th:id="left" style="float: left;padding-left: 5%">
+                            <div th:id="left" style="float: left;padding-left: 20%">
                                 <label th:for="commandinput">检索命令</label>
                                 <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
                                        th:size="8">
                             </div>
                             <div style="float: left;padding-left: 3%">
-                                <button th:onclick="commandRes()">查看指令结果</button>
+                                <button type="button" th:onclick="commandRes()">查看指令结果</button>
                             </div>
                             <script th:inline="javascript">
                                 function commandRes() //声明标识符
                                 {
-                                    var inputStr = [[${commandRes}]];
-                                    alert(inputStr)
+                                    $.ajax({
+                                        url: '/exeCommand',
+                                        type: 'post',
+                                        dataType: 'text',
+                                        async: true,
+                                        data: {
+                                            'commandStr': $('#commandinput').val(),
+                                        },
+                                        success: function (res) {
+                                            alert(res);
+                                        },
+                                        error: function () {
+                                            alert("出现异常");
+                                            //TODO
+                                        }
+                                    })
                                 }
                             </script>
 
@@ -102,21 +116,30 @@
                                        th:size="8">
                             </div>
                             <div style="float: left;padding-left: 3%">
-                                <button th:onclick="searchResFunc()">查看搜索结果</button>
+                                <button type="button" th:onclick="searchResFunc()">查看搜索结果</button>
                             </div>
                             <script th:inline="javascript">
                                 function searchResFunc() //声明标识符
                                 {
-                                    var inputStr = [[${searchRes}]];
-                                    alert("查询当前设备所属组别为：" + inputStr);
+                                    $.ajax({
+                                        url: '/searchMachine',
+                                        type: 'post',
+                                        dataType: 'text',
+                                        async: true,
+                                        data: {
+                                            'searchStr': $('#searchinput').val(),
+                                        },
+                                        success: function (res) {
+                                            alert("查询当前设备所属组别为：" + res);
+                                        },
+                                        error: function () {
+                                            alert("出现异常");
+                                            //TODO
+                                        }
+                                    })
                                 }
                             </script>
 
-                            <div style="float: left;padding-left: 25%">
-                                <button type="submit" style="width: 100px;background-color: #9fcaec"
-                                        class="btn btn-default">提交
-                                </button>
-                            </div>
 
                         </div>
                         <hr>
@@ -125,24 +148,78 @@
                             <div class="row-fluid">
                                 <div class="span12">
                                     <table class="table table-hover table-striped">
-
-                                        <!--                                        <form th:action="index" th:method="post">-->
                                         <thead>
+                                        <!--表头-->
                                         <tr>
                                             <th>IP</th>
                                             <th>CPU剩余量</th>
                                             <th>memory剩余量</th>
-                                            <th>修改组别</th>
-                                            <th>修改备注</th>
+                                            <th>修改组别
+                                                <button type="button" th:onclick="groupInput()">提交</button>
+                                                <script>
+                                                    // todo
+                                                    function groupInput() {
+                                                        $.ajax({
+                                                            url: '/groupId',
+                                                            type: 'post',
+                                                            dataType: 'text',
+                                                            async: true,
+                                                            data: {
+                                                                'groupName1': $('#groupinputname1').val(),
+                                                                'groupName2': $('#groupinputname2').val(),
+                                                            },
+                                                            success: function () {
+                                                                console.log("数据更新成功");
+                                                                alert("组别修改成功！");
+                                                            },
+                                                            error: function () {
+                                                                alert("组别修改失败！");
+                                                            }
+                                                        })
+                                                    }
+                                                </script>
+                                            </th>
+                                            <th>修改备注
+                                                <button type="button" th:onclick="aliasInput()">提交</button>
+                                                <script>
+                                                    // todo
+                                                    function aliasInput() {
+                                                        $.ajax({
+                                                            url: '/setAlias',
+                                                            type: 'post',
+                                                            dataType: 'text',
+                                                            async: true,
+                                                            data: {
+                                                                'machineName1': $('#aliasinputname1').val(),
+                                                                'machineName2': $('#aliasinputname2').val(),
+                                                            },
+                                                            success: function (res) {
+                                                                console.log("数据更新成功");
+                                                                if (res != null) {
+                                                                    alert(res);
+                                                                } else {
+                                                                    alert("未做修改");
+                                                                }
+                                                            },
+                                                            error: function () {
+
+                                                                alert("备注修改失败！");
+                                                            }
+                                                        })
+                                                    }
+                                                </script>
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <!--第一行-->
                                         <tr>
-                                            <td>127.0.0.1</td>
-                                            <td th:id="cpuId1"></td>
+                                            <!--IP-->
+                                            <td th:id="cpuIP1" th:text="${machineIP1}"></td>
+                                            <!--CPU-->
+                                            <td th:id="cpuId1" ></td>
                                             <script>
                                                 var task_cpu1 = setInterval("getCpu1()", 2000)
-
                                                 function getCpu1() {
                                                     $.ajax({
                                                         url: '/cpuInfo',
@@ -150,18 +227,17 @@
                                                         dataType: 'json',
                                                         success: function (data) {
                                                             //方法中传入的参数data为后台获取的数据
-                                                            // console.log(data);
-                                                            $("#cpuId1").html(data + "%"); //在html页面id=test的标签里显示html内容
+                                                            $("#cpuId1").html(data["cpu1"] + "%"); //在html页面id=test的标签里显示html内容
+                                                            $("#cpuId2").html(data["cpu2"] + "%");
                                                         }
                                                     })
 
                                                 }
                                             </script>
-
+                                            <!--内存-->
                                             <td th:id="memId1"></td>
                                             <script>
                                                 var task_mem1 = setInterval("getMem1()", 2000)
-
                                                 function getMem1() {
                                                     $.ajax({
                                                         url: '/memInfo',
@@ -170,37 +246,43 @@
                                                         success: function (data) {
                                                             //方法中传入的参数data为后台获取的数据
                                                             // console.log(data);
-                                                            $("#memId1").html(data + "M"); //在html页面id=test的标签里显示html内容
+                                                            $("#memId1").html(data["mem1"] + "M"); //在html页面id=test的标签里显示html内容
+                                                            $("#memId2").html(data["mem2"] + "M");
                                                         }
                                                     })
                                                 }
                                             </script>
+                                            <!--组别-->
                                             <td>
                                                 <input th:id="groupinputname1" th:type="text" th:name="groupName1"
                                                        th:placeholder="请输入新组别" th:size="12">
                                             </td>
+                                            <!--备注-->
                                             <td>
                                                 <input th:id="aliasinputname1" th:type="text" th:name="machineName1"
                                                        th:placeholder="请输入备注" th:size="12">
                                             </td>
                                         </tr>
+                                        <!--第二行-->
                                         <tr>
-                                            <td>127.0.0.2</td>
-                                            <td>50%</td>
-                                            <td>50%</td>
+                                            <!--IP-->
+                                            <td th:id="cpuIP2" th:text="${machineIP2}"></td>
+                                            <!--CPU-->
+                                            <td th:id="cpuId2">/td>
+                                            <!--内存-->
+                                            <td th:id="memId2"></td>
+                                            <!--组别-->
                                             <td>
                                                 <input th:id="groupinputname2" th:type="text" th:name="groupName2"
                                                        th:placeholder="请输入新组别" th:size="12">
                                             </td>
+                                            <!--备注-->
                                             <td>
                                                 <input th:id="aliasinputname2" th:type="text" th:name="machineName2"
                                                        th:placeholder="请输入备注" th:size="12">
                                             </td>
                                         </tr>
-
                                         </tbody>
-
-                                        <!--                                        </form>-->
                                     </table>
                                 </div>
                             </div>
@@ -214,19 +296,21 @@
                         <!-- Company overview Chart -->
                         <div class="col-lg-8">
                             <div class="card">
-                                    <div th:id="chartHead">
-                                        <form th:id="formChartData" method="post">
+                                <div th:id="chartHead">
+                                    <form th:id="formChartData" method="post">
                                         <div style="float: left;padding-left: 1%; font-size: 25px">
                                             <strong>CPU资源占用总览</strong>
                                         </div>
                                         <div style="float: left;padding-left: 2%;padding-top: 5px">
-                                            <input th:id="inputCpuIp" th:type="text" name="cpuChooseIp" th:placeholder="请输入ip" th:size="12" value="">
+                                            <input th:id="inputCpuIp" th:type="text" name="cpuChooseIp"
+                                                   th:placeholder="请输入ip" th:size="12" value="">
                                         </div>
                                         <div style="float: left;padding-left: 2%;">
                                             <b>开始日期</b>
                                             <input type="datetime-local" th:id="startDate" name="cpu_date1" value=""/>
                                         </div>
-                                        <div style="float: left;padding-left: 2%;"><b>结束日期</b><input type="datetime-local" th:id="endDate" name="cpu_date2" value=""/>
+                                        <div style="float: left;padding-left: 2%;"><b>结束日期</b><input
+                                                type="datetime-local" th:id="endDate" name="cpu_date2" value=""/>
                                         </div>
                                         <div style="float: left;padding-left: 2%;">
                                             <select th:id="selectId" name="timeChoice" value="">
@@ -237,26 +321,28 @@
                                         </div>
 
                                         <div style="float: left;padding-left: 20%;">
-                                            <button type="button" th:onclick="drawChart()">提交配置</button>&nbsp<input type="reset" value="重置">
+                                            <button type="button" th:onclick="drawChart()">提交配置</button>
+                                            &nbsp<input type="reset" value="重置">
                                         </div>
-                                        </form>
-                                    </div>
+                                    </form>
+                                </div>
 
 
                                 <div class="card-block p-b-0 bg-blue bg-inverse">
                                     <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                    <div id="container" style="height: 400px;" >
-                                        <script th:inline="javascript" type="text/javascript" >
+                                    <div id="container" style="height: 300px;">
+                                        <script th:inline="javascript" type="text/javascript">
                                             function drawChart() {
                                                 $.ajax({
                                                     url: '/drawCharts',
                                                     type: 'post',
                                                     dataType: 'json',
                                                     async: true,
-                                                    data:{'cpuChooseIp':$('#inputCpuIp').val(),
-                                                        'cpu_date1':$('#startDate').val(),
-                                                        'cpu_date2':$('#endDate').val(),
-                                                        'timeChoice':$('#selectId').val(),
+                                                    data: {
+                                                        'cpuChooseIp': $('#inputCpuIp').val(),
+                                                        'cpu_date1': $('#startDate').val(),
+                                                        'cpu_date2': $('#endDate').val(),
+                                                        'timeChoice': $('#selectId').val(),
                                                     },
                                                     success: function (res) {
                                                         var date = res["timeSection"];
@@ -310,7 +396,7 @@
                                                             }],
                                                             series: [
                                                                 {
-                                                                    name: '模拟数据',
+                                                                    name: '监测数据',
                                                                     type: 'line',
                                                                     smooth: true,
                                                                     symbol: 'none',
@@ -336,109 +422,169 @@
                                                 })
 
 
-
                                             }
                                         </script>
-
                                     </div>
-
-
                                 </div>
-
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-xs-6 col-lg-3 b-r">
-                                            <p class="h6 small text-muted">历史最大占用率</p>
-                                            <p class="h3 m-t-0 m-b-md">+214.22</p>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                            <p class="h6 small text-muted">历史最小占用率</p>
-                                            <p class="h3 m-t-0 m-b-md">$28.74M</p>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                            <p class="h6 small text-muted">历史平均占用率</p>
-                                            <p class="h3 m-t-0 m-b-md">+74%</p>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3">
-                                            <p class="h6 small text-muted">状态是否正常</p>
-                                            <p class="h3 m-t-0 m-b-md">$74.23M</p>
-                                        </div>
-                                    </div>
-                                    <!-- .row -->
-                                </div>
-                                <!-- .card-block -->
                             </div>
-                            <!-- .card -->
                         </div>
                         <!-- .col-lg-8 -->
                         <!-- End Company overview Chart -->
-
                     </div>
                     <!-- .row -->
+
 
                     <div class="row">
                         <!-- Company overview Chart -->
                         <div class="col-lg-8">
                             <div class="card">
-                                <div class="card-header bg-blue bg-inverse">
-                                    <h4>Memory占用总览</h4>
+                                <div th:id="chartHead">
+                                        <div style="float: left;padding-left: 1%; font-size: 25px">
+                                            <strong>内存资源占用总览</strong>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;padding-top: 5px">
+                                            <input th:id="inputMemIp" th:type="text" name="memChooseIp"
+                                                   th:placeholder="请输入ip" th:size="12" value="">
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;">
+                                            <b>开始日期</b>
+                                            <input type="datetime-local" th:id="memStartDate" name="mem_date1" value=""/>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;"><b>结束日期</b><input
+                                                type="datetime-local" th:id="memEndDate" name="mem_date2" value=""/>
+                                        </div>
+                                        <div style="float: left;padding-left: 2%;">
+                                            <select th:id="memSelectId" name="memTimeChoice" value="">
+                                                <option value="day">天</option>
+                                                <option value="hour">时</option>
+                                                <option value="minute">分</option>
+                                            </select>
+                                        </div>
+
+                                        <div style="float: left;padding-left: 20%;">
+                                            <button type="button" th:onclick="memDrawChart()">提交配置</button>
+                                            &nbsp<input type="reset" value="重置">
+                                        </div>
                                 </div>
+
                                 <div class="card-block p-b-0 bg-blue bg-inverse">
                                     <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                    <div style="height: 200px;">
-                                        <canvas class="js-chartjs-lines1"></canvas>
+                                    <div id="memContainer" style="height: 300px;">
+                                        <script th:inline="javascript" type="text/javascript">
+                                            function memDrawChart() {
+                                                $.ajax({
+                                                    url: '/memDrawCharts',
+                                                    type: 'post',
+                                                    dataType: 'json',
+                                                    async: true,
+                                                    data: {
+                                                        'memChooseIp': $('#inputMemIp').val(),
+                                                        'mem_date1': $('#memStartDate').val(),
+                                                        'mem_date2': $('#memEndDate').val(),
+                                                        'memTimeChoice': $('#memSelectId').val(),
+                                                    },
+                                                    success: function (res) {
+                                                        var date = res["timeSection"];
+                                                        var data = res["memFreeSection"];
+                                                        var chartDom = document.getElementById('memContainer');
+                                                        var myChart = echarts.init(chartDom);
+                                                        var option;
+                                                        option = {
+                                                            tooltip: {
+                                                                trigger: 'axis',
+                                                                position: function (pt) {
+                                                                    return [pt[0], '10%'];
+                                                                }
+                                                            },
+                                                            toolbox: {
+                                                                feature: {
+                                                                    saveAsImage: {}
+                                                                }
+                                                            },
+                                                            xAxis: {
+                                                                type: 'category',
+                                                                boundaryGap: false,
+                                                                data: date
+                                                            },
+                                                            yAxis: {
+                                                                type: 'value',
+                                                                boundaryGap: [0, '100%']
+                                                            },
+                                                            grid: {
+                                                                left: '5%',
+                                                                right: '5%',
+                                                                bottom: '20%',
+                                                                top: '10%'
+                                                            },
+                                                            dataZoom: [{
+                                                                type: 'inside',
+                                                                start: 0,
+                                                                end: 10
+                                                            }, {
+                                                                start: 0,
+                                                                end: 10,
+                                                                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                                                                handleSize: '80%',
+                                                                handleStyle: {
+                                                                    color: '#fff',
+                                                                    shadowBlur: 3,
+                                                                    shadowColor: 'rgba(0, 0, 0, 0.6)',
+                                                                    shadowOffsetX: 2,
+                                                                    shadowOffsetY: 2
+                                                                }
+                                                            }],
+                                                            series: [
+                                                                {
+                                                                    name: '监测数据',
+                                                                    type: 'line',
+                                                                    smooth: true,
+                                                                    symbol: 'none',
+                                                                    sampling: 'average',
+                                                                    itemStyle: {
+                                                                        color: 'rgb(255, 70, 131)'
+                                                                    },
+                                                                    areaStyle: {
+                                                                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                                                            offset: 0,
+                                                                            color: 'rgb(255, 158, 68)'
+                                                                        }, {
+                                                                            offset: 1,
+                                                                            color: 'rgb(255, 70, 131)'
+                                                                        }])
+                                                                    },
+                                                                    data: data
+                                                                }
+                                                            ]
+                                                        };
+                                                        myChart.setOption(option);
+                                                    }
+                                                })
+
+
+                                            }
+                                        </script>
                                     </div>
                                 </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-xs-6 col-lg-3 b-r">
-                                            <p class="h6 small text-muted">Yearly change</p>
-                                            <p class="h3 m-t-0 m-b-md">+214.22</p>
-                                            <div class="progress progress-mini m-b-sm">
-                                                <div class="progress-bar progress-bar-green" role="progressbar"
-                                                     aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 76%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                            <p class="h6 small text-muted">Shares trade</p>
-                                            <p class="h3 m-t-0 m-b-md">$28.74M</p>
-                                            <div class="progress progress-mini m-b-sm">
-                                                <div class="progress-bar progress-bar-green" role="progressbar"
-                                                     aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 84%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3 b-r visible-lg">
-                                            <p class="h6 small text-muted">Yearly change</p>
-                                            <p class="h3 m-t-0 m-b-md">+74%</p>
-                                            <div class="progress progress-mini m-b-sm">
-                                                <div class="progress-bar progress-bar-green" role="progressbar"
-                                                     aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 74%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6 col-lg-3">
-                                            <p class="h6 small text-muted">Total revenue</p>
-                                            <p class="h3 m-t-0 m-b-md">$74.23M</p>
-                                            <div class="progress progress-mini m-b-sm">
-                                                <div class="progress-bar progress-bar-green" role="progressbar"
-                                                     aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 90%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- .row -->
-                                </div>
-                                <!-- .card-block -->
                             </div>
-                            <!-- .card -->
                         </div>
                         <!-- .col-lg-8 -->
                         <!-- End Company overview Chart -->
-
                     </div>
-                    <!-- .row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 </div>
                 <!-- .container-fluid -->

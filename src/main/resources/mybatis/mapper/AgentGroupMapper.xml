@@ -12,6 +12,10 @@
     select alias from monitor.agent_group where ip = #{ip};
     </select>
 
+    <select id="getAllIP" resultType="String" parameterType="java.lang.String">
+    select ip from monitor.agent_group;
+    </select>
+
     <update id="updateAliasByIP" parameterType="com.guotai.servermonitorspringboot.entity.AgentGroup">
     update monitor.agent_group set alias = #{alias} where ip = #{ip};
     </update>

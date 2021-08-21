@@ -9,6 +9,8 @@ import com.guotai.servermonitorspringboot.mapper.AgentGroupMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AgentGroupService {
 
@@ -29,6 +31,10 @@ public class AgentGroupService {
 
     public void updateGroupByIP(String ip, String groupId) {
         agentGroupMapper.updateGroupByIP(ip, groupId);
+    }
+
+    public List<String> getAllIP() {
+        return agentGroupMapper.getAllIP();
     }
 
 }
