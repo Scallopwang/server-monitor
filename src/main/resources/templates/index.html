@@ -230,7 +230,7 @@
                                                         success: function (data) {
                                                             //方法中传入的参数data为后台获取的数据
                                                             $("#cpuId1").html(data["cpu1"] + "%"); //在html页面id=test的标签里显示html内容
-                                                            $("#cpuId2").html(data["cpu2"] + "%");
+                                                            // $("#cpuId2").html(data["cpu2"] + "%");
                                                         }
                                                     })
 
@@ -250,7 +250,7 @@
                                                             //方法中传入的参数data为后台获取的数据
                                                             // console.log(data);
                                                             $("#memId1").html(data["mem1"] + "M"); //在html页面id=test的标签里显示html内容
-                                                            $("#memId2").html(data["mem2"] + "M");
+                                                            // $("#memId2").html(data["mem2"] + "M");
                                                         }
                                                     })
                                                 }
@@ -271,7 +271,7 @@
                                             <!--IP-->
                                             <td th:id="cpuIP2" th:text="${machineIP2}"></td>
                                             <!--CPU-->
-                                            <td th:id="cpuId2">/td>
+                                            <td th:id="cpuId2"></td>
                                                 <!--内存-->
                                             <td th:id="memId2"></td>
                                             <!--组别-->
