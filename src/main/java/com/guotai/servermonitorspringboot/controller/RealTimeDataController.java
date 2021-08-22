@@ -7,6 +7,7 @@ package com.guotai.servermonitorspringboot.controller;
 
 import com.guotai.servermonitorspringboot.entity.ThriftCommunication;
 import com.guotai.servermonitorspringboot.service.AgentGroupService;
+import com.guotai.servermonitorspringboot.service.AgentProcessService;
 import com.guotai.servermonitorspringboot.service.LocalAgentService;
 import com.guotai.servermonitorspringboot.thrift.ThriftClientStart;
 import com.guotai.servermonitorspringboot.utils.ExecuteCommand;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sun.management.resources.agent;
 import thriftmonitor.Agent;
+import thriftmonitor.AgentProcess;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
@@ -40,6 +42,8 @@ public class RealTimeDataController {
     private ThriftCommunication thriftCommunication;
     @Autowired
     private IPMap ipMap;
+    @Autowired
+    private AgentProcessService agentProcessService;
 
     private Map<String, String> timeChoiceMap = new HashMap<String, String>() {{
         put("day", "%Y-%m-%d 10:00:00");
@@ -61,6 +65,8 @@ public class RealTimeDataController {
         setAlias(model, request);
         exeCommand(model, request);
         searchMachine(model, request);
+        getProcess1();
+//        getProcess2();
         drawCharts(request);
         return "index";
     }
@@ -168,6 +174,36 @@ public class RealTimeDataController {
         model.addAttribute("searchRes", searchRes);
         return searchRes;
     }
+
+    @RequestMapping("/getProcess1")
+    @ResponseBody
+    public Map<String,Object> getProcess1() {
+        // 获取、搜索设备
+        Map<String, Object> process1Map = new HashMap<>();
+        AgentProcess agentProcess1 = agentProcessService.getLatestAgentProcessByIP(ipMap.getFormMap().get("machineIP1"));
+        process1Map.put("ip", agentProcess1.ip);
+        process1Map.put("process_name", agentProcess1.process_name);
+        process1Map.put("process_id", agentProcess1.process_id);
+        process1Map.put("process_mem", agentProcess1.process_mem);
+        process1Map.put("process_start_time", agentProcess1.process_start_time);
+        return process1Map;
+    }
+
+//    @RequestMapping("/getProcess2")
+//    @ResponseBody
+//    public Map<String,Object> getProcess2() {
+//        // 获取、搜索设备
+//        Map<String, Object> process2Map = new HashMap<>();
+//        AgentProcess agentProcess2 = agentProcessService.getLatestAgentProcessByIP(ipMap.getFormMap().get("machineIP2"));
+//        process2Map.put("ip", agentProcess2.ip);
+//        process2Map.put("process_name", agentProcess2.process_name);
+//        process2Map.put("process_id", agentProcess2.process_id);
+//        process2Map.put("process_mem", agentProcess2.process_mem);
+//        process2Map.put("process_start_time", agentProcess2.process_start_time);
+//        return process2Map;
+//    }
+
+
 
     @RequestMapping("/drawCharts")
     @ResponseBody

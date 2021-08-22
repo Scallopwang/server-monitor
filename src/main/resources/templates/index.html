@@ -148,14 +148,14 @@
                         <div class="row">
                             <div class="row-fluid">
                                 <div class="span12">
-                                    <table class="table table-hover table-striped">
+                                    <table  class="table table-hover table-striped">
                                         <thead>
                                         <!--表头-->
                                         <tr>
-                                            <th>IP</th>
-                                            <th>CPU剩余量</th>
-                                            <th>memory剩余量</th>
-                                            <th>修改组别
+                                            <th th:width="340px">IP</th>
+                                            <th th:width="340px">CPU剩余量</th>
+                                            <th th:width="340px">memory剩余量</th>
+                                            <th th:width="340px">修改组别
                                                 <button type="button" th:onclick="groupInput()">提交</button>
                                                 <script>
                                                     // todo
@@ -180,7 +180,7 @@
                                                     }
                                                 </script>
                                             </th>
-                                            <th>修改备注
+                                            <th th:width="340px">修改备注
                                                 <button type="button" th:onclick="aliasInput()">提交</button>
                                                 <script>
                                                     // todo
@@ -290,6 +290,95 @@
                                 </div>
                             </div>
                         </div>
+                        <!--进程信息-->
+                        <div class="row">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                        <!--表头-->
+                                        <tr>
+                                            <th th:width="340px">IP</th>
+                                            <th th:width="340px">进程ID</th>
+                                            <th th:width="340px">进程名称</th>
+                                            <th th:width="340px">进程内存</th>
+                                            <th th:width="340px">进程开启时间</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!--第一行-->
+                                        <tr>
+                                            <!--IP-->
+                                            <td th:id="processIPId1" th:name="processIPName1"></td>
+                                            <!--ID-->
+                                            <td th:id="processIdId1" th:name="processIdName1"></td>
+                                            <!--name-->
+                                            <td th:id="processNameId1" th:name="processNameName1"></td>
+                                            <!--memory-->
+                                            <td th:id="processMemoryId1" th:name="processMemoryName1"></td>
+                                            <!--start-time-->
+                                            <td th:id="processTimeId1" th:name="processTimeName1"></td>
+                                            <script>
+                                                var task_process1 = setInterval("getprocess1()", 2000)
+                                                function getprocess1() {
+                                                    $.ajax({
+                                                        url: '/getProcess1',
+                                                        type: 'get',
+                                                        dataType: 'json',
+                                                        success: function (data) {
+                                                            //方法中传入的参数data为后台获取的数据
+                                                            $("#processIPId1").html(data["ip"]); //在html页面id=test的标签里显示html内容
+                                                            $("#processIdId1").html(data["process_id"]);
+                                                            $("#processNameId1").html(data["process_name"]);
+                                                            $("#processMemoryId1").html(data["process_mem"]);
+                                                            $("#processTimeId1").html(data["process_start_time"]);
+                                                        },
+                                                        error:function () {
+                                                            alert("failure");
+                                                        }
+                                                    })
+
+                                                }
+                                            </script>
+                                        </tr>
+                                        <!--第二行-->
+                                        <tr>
+                                            <!--IP-->
+                                            <td th:id="processIPId2" th:name="processIPName2"></td>
+                                            <!--ID-->
+                                            <td th:id="processIdId2" th:name="processIdName2"></td>
+                                            <!--name-->
+                                            <td th:id="processNameId2" th:name="processNameName2"></td>
+                                            <!--memory-->
+                                            <td th:id="processMemoryId2" th:name="processMemoryName2"></td>
+                                            <!--start-time-->
+                                            <td th:id="processTimeId2" th:name="processTimeName2"></td>
+<!--                                            <script>-->
+<!--                                                var task_process2 = setInterval("getprocess2()", 2000)-->
+<!--                                                function getprocess2() {-->
+<!--                                                    $.ajax({-->
+<!--                                                        url: '/getProcess2',-->
+<!--                                                        type: 'get',-->
+<!--                                                        dataType: 'json',-->
+<!--                                                        success: function (data) {-->
+<!--                                                            //方法中传入的参数data为后台获取的数据-->
+<!--                                                            $("#processIPId2").html(data["processIPName2"]); //在html页面id=test的标签里显示html内容-->
+<!--                                                            $("#processIdId2").html(data["processIdName2"]);-->
+<!--                                                            $("#processNameId2").html(data["processNameName2"]);-->
+<!--                                                            $("#processMemoryId2").html(data["processMemoryName2"]);-->
+<!--                                                            $("#processTimeId2").html(data["processTimeName2"]);-->
+<!--                                                        }-->
+<!--                                                    })-->
+
+<!--                                                }-->
+<!--                                            </script>-->
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
 
 
                     </div>

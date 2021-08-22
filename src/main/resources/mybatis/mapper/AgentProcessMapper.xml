@@ -8,4 +8,8 @@
     insert into monitor.agent_process(ip,process_name,process_id,process_mem,process_start_time) values (#{ip},#{process_name},#{process_id},#{process_mem},#{process_start_time});
     </insert>
 
+    <select id="getLatestAgentProcessByIP" resultType="thriftmonitor.AgentProcess" parameterType="java.lang.String">
+    select * from monitor.agent_process where ip = #{ip} order by create_time desc limit 0,1;
+    </select>
+
 </mapper>

@@ -19,4 +19,8 @@ public class AgentProcessService {
     public void insertAgentProcess(AgentProcess agentProcess) {
        agentProcessMapper.insertAgentProcess(agentProcess);
     }
+
+    public AgentProcess getLatestAgentProcessByIP(String ip) {
+        return agentProcessMapper.getLatestAgentProcessByIP(ip);
+    }
 }
