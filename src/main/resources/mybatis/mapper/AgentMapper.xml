@@ -49,8 +49,6 @@
     </select>
 
 
-
-
     <insert id="insertAgent" parameterType="thriftmonitor.Agent">
     insert into monitor.agent(ip,cpu_free,memory_free) values (#{ip},#{cpu_free},#{memory_free});
     </insert>
