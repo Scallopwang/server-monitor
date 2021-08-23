@@ -43,32 +43,23 @@
 <script th:inline="javascript" language="javascript">
     var task = setInterval("warning()", 2000)
 
-    function warning() //声明标识符
-    {
+    function warning() {
         $.ajax({
-            url: '/cpuInfo',
+            url: '/getBasicInfo1',
             type: 'get',
             dataType: 'json',
             success: function (data) {
                 //方法中传入的参数data为后台获取的数据
-                if (data > 80) {
-                    alert("当前CPU占用峰值为：" + data + "%，CPU占用资源过高！");
+                if (data["cpu_free"] > 80) {
+                    alert("当前CPU占用峰值为：" + data["cpu_free"] + "%，CPU占用资源过高！");
                 }
-            }
-        })
-
-        $.ajax({
-            url: '/memInfo',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                //方法中传入的参数data为后台获取的数据
-                if (data < 2000) {
+                if (data["memory_free"] < 1000) {
                     alert("内存资源不足！");
                 }
             }
         })
     }
+
 </script>
 <div class="app-layout-canvas">
     <div class="app-layout-container">
