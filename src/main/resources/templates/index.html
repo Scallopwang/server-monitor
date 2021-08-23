@@ -216,45 +216,44 @@
                                         <!--第一行-->
                                         <tr>
                                             <!--IP-->
-                                            <td th:id="cpuIP1" th:text="${machineIP1}"></td>
+                                            <td th:id="cpuIP1"></td>
                                             <!--CPU-->
                                             <td th:id="cpuId1"></td>
-                                            <script>
-                                                var task_cpu1 = setInterval("getCpu1()", 2000)
-
-                                                function getCpu1() {
-                                                    $.ajax({
-                                                        url: '/cpuInfo',
-                                                        type: 'get',
-                                                        dataType: 'json',
-                                                        success: function (data) {
-                                                            //方法中传入的参数data为后台获取的数据
-                                                            $("#cpuId1").html(data["cpu1"] + "%"); //在html页面id=test的标签里显示html内容
-                                                            // $("#cpuId2").html(data["cpu2"] + "%");
-                                                        }
-                                                    })
-
-                                                }
-                                            </script>
                                             <!--内存-->
                                             <td th:id="memId1"></td>
                                             <script>
-                                                var task_mem1 = setInterval("getMem1()", 2000)
-
-                                                function getMem1() {
+                                                var task_basicinfo1 = setInterval("getBasicInfo1()", 2000)
+                                                function getBasicInfo1() {
                                                     $.ajax({
-                                                        url: '/memInfo',
+                                                        url: '/getBasicInfo1',
                                                         type: 'get',
                                                         dataType: 'json',
                                                         success: function (data) {
                                                             //方法中传入的参数data为后台获取的数据
-                                                            // console.log(data);
-                                                            $("#memId1").html(data["mem1"] + "M"); //在html页面id=test的标签里显示html内容
-                                                            // $("#memId2").html(data["mem2"] + "M");
+                                                            $("#cpuIP1").html(data["ip"]); //在html页面id=test的标签里显示html内容
+                                                            $("#cpuId1").html(data["cpu_free"] + "%");
+                                                            $("#memId1").html(data["memory_free"] + "M");
                                                         }
                                                     })
+
                                                 }
                                             </script>
+<!--                                            <script>-->
+<!--                                                var task_cpu1 = setInterval("getCpu1()", 2000)-->
+<!--                                                function getCpu1() {-->
+<!--                                                    $.ajax({-->
+<!--                                                        url: '/cpuInfo',-->
+<!--                                                        type: 'get',-->
+<!--                                                        dataType: 'json',-->
+<!--                                                        success: function (data) {-->
+<!--                                                            //方法中传入的参数data为后台获取的数据-->
+<!--                                                            // $("#cpuId1").html(data["cpu1"] + "%"); //在html页面id=test的标签里显示html内容-->
+<!--                                                            // $("#cpuId2").html(data["cpu2"] + "%");-->
+<!--                                                        }-->
+<!--                                                    })-->
+
+<!--                                                }-->
+<!--                                            </script>-->
                                             <!--组别-->
                                             <td>
                                                 <input th:id="groupinputname1" th:type="text" th:name="groupName1"
@@ -267,24 +266,24 @@
                                             </td>
                                         </tr>
                                         <!--第二行-->
-                                        <tr>
-                                            <!--IP-->
-                                            <td th:id="cpuIP2" th:text="${machineIP2}"></td>
-                                            <!--CPU-->
-                                            <td th:id="cpuId2"></td>
-                                                <!--内存-->
-                                            <td th:id="memId2"></td>
-                                            <!--组别-->
-                                            <td>
-                                                <input th:id="groupinputname2" th:type="text" th:name="groupName2"
-                                                       th:placeholder="请输入新组别" th:size="12">
-                                            </td>
-                                            <!--备注-->
-                                            <td>
-                                                <input th:id="aliasinputname2" th:type="text" th:name="machineName2"
-                                                       th:placeholder="请输入备注" th:size="12">
-                                            </td>
-                                        </tr>
+<!--                                        <tr>-->
+<!--                                            &lt;!&ndash;IP&ndash;&gt;-->
+<!--                                            <td th:id="cpuIP2" th:text="${machineIP2}"></td>-->
+<!--                                            &lt;!&ndash;CPU&ndash;&gt;-->
+<!--                                            <td th:id="cpuId2"></td>-->
+<!--                                                &lt;!&ndash;内存&ndash;&gt;-->
+<!--                                            <td th:id="memId2"></td>-->
+<!--                                            &lt;!&ndash;组别&ndash;&gt;-->
+<!--                                            <td>-->
+<!--                                                <input th:id="groupinputname2" th:type="text" th:name="groupName2"-->
+<!--                                                       th:placeholder="请输入新组别" th:size="12">-->
+<!--                                            </td>-->
+<!--                                            &lt;!&ndash;备注&ndash;&gt;-->
+<!--                                            <td>-->
+<!--                                                <input th:id="aliasinputname2" th:type="text" th:name="machineName2"-->
+<!--                                                       th:placeholder="请输入备注" th:size="12">-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                         </tbody>
                                     </table>
                                 </div>
@@ -334,7 +333,8 @@
                                                             $("#processTimeId1").html(data["process_start_time"]);
                                                         },
                                                         error:function () {
-                                                            alert("failure");
+                                                            // alert("failure");
+                                                            console.log("获取进程信息失败")
                                                         }
                                                     })
 
@@ -422,7 +422,7 @@
 
                                 <div class="card-block p-b-0 bg-blue bg-inverse">
                                     <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                    <div id="container" style="height: 300px;">
+                                    <div id="container" style="height: 300px;width: 1400px">
                                         <script th:inline="javascript" type="text/javascript">
                                             function drawChart() {
                                                 $.ajax({
@@ -512,8 +512,6 @@
                                                         myChart.setOption(option);
                                                     }
                                                 })
-
-
                                             }
                                         </script>
                                     </div>
@@ -561,7 +559,7 @@
 
                                 <div class="card-block p-b-0 bg-blue bg-inverse">
                                     <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples please check http://www.chartjs.org/docs/ -->
-                                    <div id="memContainer" style="height: 300px;">
+                                    <div id="memContainer" style="height: 300px;width: 1400px">
                                         <script th:inline="javascript" type="text/javascript">
                                             function memDrawChart() {
                                                 $.ajax({

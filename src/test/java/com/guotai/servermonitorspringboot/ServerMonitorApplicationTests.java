@@ -41,7 +41,7 @@ class ServerMonitorApplicationTests {
 
     @Test
     void test() {
-        System.out.println(System.getProperty("file.encoding"));
+        System.out.println(System.getProperty("os.name"));
     }
 
 }

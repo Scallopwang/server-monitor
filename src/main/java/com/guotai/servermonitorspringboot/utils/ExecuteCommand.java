@@ -18,7 +18,10 @@ public class ExecuteCommand {
             return null;
         }
         try{
-            String commandBaseStr = "cmd /C ";
+            String commandBaseStr = "";
+            if (System.getProperty("os.name").equals("Windows 10")) {
+                commandBaseStr = "cmd /C ";
+            }
             Process process=Runtime.getRuntime().exec(commandBaseStr+para);
             InputStreamReader reader = new InputStreamReader(process.getInputStream(), Charset.forName("GBK"));
             LineNumberReader line = new LineNumberReader(reader);
