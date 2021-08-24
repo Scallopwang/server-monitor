@@ -10,21 +10,21 @@ import org.apache.thrift.protocol.TCompactProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.layered.TFramedTransport;
 import org.springframework.stereotype.Component;
-import thriftmonitor.Agent;
 import thriftmonitor.AgentService;
 
 @Component
 public class ThriftClientStart {
 
 
-    public void clientStart(String commandStr) {
+    public String clientStart(String ip, String commandStr) {
         try {
-            TFramedTransport transport = new TFramedTransport(new TSocket("localhost", 8887), 600);
+            TFramedTransport transport = new TFramedTransport(new TSocket("localhost", 8887), 2000);
             TCompactProtocol tCompactProtocol = new TCompactProtocol(transport);
             AgentService.Client client = new AgentService.Client(tCompactProtocol);
             transport.open();
-            client.sendMsg(commandStr);
+            String commandRes = client.serverSendCommand(ip, commandStr);
             transport.close();
+            return commandRes;
 
         } catch (Exception e) {
             e.printStackTrace();

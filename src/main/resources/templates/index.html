@@ -34,7 +34,7 @@
     <!-- End Stylesheets -->
 
 
-    <script src="js/pages/index.js"></script>
+    <script src="js/homepage.js"></script>
     <script src="js/echarts.js"></script>
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
@@ -42,7 +42,6 @@
 <body class="app-ui layout-has-drawer layout-has-fixed-header" onload="drawChart();memDrawChart()">
 <script th:inline="javascript" language="javascript">
     var task = setInterval("warning()", 2000)
-
     function warning() {
         $.ajax({
             url: '/getBasicInfo1',
@@ -52,14 +51,31 @@
                 //方法中传入的参数data为后台获取的数据
                 if (data["cpu_free"] > 80) {
                     alert("当前CPU占用峰值为：" + data["cpu_free"] + "%，CPU占用资源过高！");
+                    $.ajax({
+                        url: '/sendEmail',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {"warningContent":"CPU资源告警，使用率已超过80%"},
+                        success: function (data) {
+                            //方法中传入的参数data为后台获取的数据
+                        }
+                    })
                 }
                 if (data["memory_free"] < 1000) {
                     alert("内存资源不足！");
+                    $.ajax({
+                        url: '/sendEmail',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {"warningContent":"memory资源告警，余量已低于1000M"},
+                        success: function (data) {
+                            //方法中传入的参数data为后台获取的数据
+                        }
+                    })
                 }
             }
         })
     }
-
 </script>
 <div class="app-layout-canvas">
     <div class="app-layout-container">
@@ -71,11 +87,11 @@
                     <div>
                         <div th:id="header-main" style="overflow: hidden">
                             <div th:id="left" style="float: left;padding-left: 20%">
-                                <label th:for="commandinput" >检索命令</label>
+                                <label th:for="commandIPInput">远程命令入口</label>
+                                <input th:id="commandIPInput" th:type="text" th:name="commandIP" th:placeholder="请指定ip"
+                                       th:size="12">
                                 <input th:id="commandinput" th:type="text" th:name="commandStr" th:placeholder="请输入命令"
-                                       th:size="8"
-                                       onmouseout="this.style.borderColor='black';this.style.backgroundColor='#ffffff'"
-                                       style="border-width:1px;border-color:black">
+                                       th:size="8">
                             </div>
                             <div style="float: left;padding-left: 3%">
                                 <button type="button" th:onclick="commandRes()">查看指令结果</button>
@@ -90,6 +106,7 @@
                                         async: true,
                                         data: {
                                             'commandStr': $('#commandinput').val(),
+                                            'commandIP': $('#commandIPInput').val(),
                                         },
                                         success: function (res) {
                                             alert(res);

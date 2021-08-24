@@ -5,7 +5,6 @@
 */
 package com.guotai.servermonitorspringboot.controller;
 
-import com.guotai.servermonitorspringboot.entity.ThriftCommunication;
 import com.guotai.servermonitorspringboot.service.AgentGroupService;
 import com.guotai.servermonitorspringboot.thrift.ThriftClientStart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +20,21 @@ public class ConsoleHeadController {
     @Autowired
     private ThriftClientStart thriftClientStart;
     @Autowired
-    private ThriftCommunication thriftCommunication;
-    @Autowired
     private AgentGroupService agentGroupService;
 
     @RequestMapping("/exeCommand")
     @ResponseBody
     public String exeCommand(Model model, HttpServletRequest request) {
         // 传送指令至agent
-        System.out.println("执行接口");
-        thriftClientStart.clientStart(request.getParameter("commandStr"));
+        String commandIP = request.getParameter("commandIP");
+        String commandStr = request.getParameter("commandStr");
+        if (commandIP != null && commandStr != null) {
+            String s = thriftClientStart.clientStart(commandIP, commandStr);
+            System.out.println(s);
+            return s;
+        }
         // 结果传入前端
-        return thriftCommunication.getCommandRes();
+        return "";
     }
 
     @RequestMapping("/searchMachine")

@@ -4,7 +4,6 @@ package com.guotai.servermonitorspringboot.thrift;/*
 @Date  : 2021-08-03 13:41
 */
 
-import com.guotai.servermonitorspringboot.entity.ThriftCommunication;
 import com.guotai.servermonitorspringboot.service.AgentProcessService;
 import com.guotai.servermonitorspringboot.service.LocalAgentService;
 import org.apache.thrift.TException;
@@ -25,12 +24,9 @@ public class ThriftAgentService implements AgentService.Iface {
     @Autowired
     private AgentProcessService agentProcessService;
 
-    @Autowired
-    private ThriftCommunication thriftCommunication;
 
     @Override
     public Agent sendAgentByIP(String ip, Agent agent) throws DataException, TException {
-//        System.out.println("server：" + agent.toString());
         try {
             localAgentService.insertAgent(agent);
         } catch (Exception e) {
@@ -54,19 +50,13 @@ public class ThriftAgentService implements AgentService.Iface {
     }
 
     @Override
-    public String getCommand(String s, String s1) throws TException {
+    public String serverSendCommand(String s, String s1) throws TException {
         return null;
     }
 
     @Override
-    public String getCollectFre(String ip) throws TException {
-        return null;
-    }
-
-    @Override
-    public void sendMsg(String msg) throws TException {
-//        System.out.println("接收agent信息为：" + msg);
-        thriftCommunication.setCommandRes(msg);
+    public void sendMsg(String ip, String msg) throws TException {
+        System.out.println("服务端接收客户端信息为：" + msg);
     }
 
 
